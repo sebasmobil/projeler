@@ -1,5 +1,4 @@
 # Uygulama güncelleniyor
+Lisans
 
-## Lisans
-Bu proje GNU GPL v3.0 lisansı ile lisanslanmıştır.
-© sebasmobil
+Bu proje GNU Affero General Public License v3.0 ile lisanslanmıştır. Copyright (C) 2026 [sebasmobil] sebasmobil.github.io
