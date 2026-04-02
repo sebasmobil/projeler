@@ -51,6 +51,9 @@
     background: var(--bg-pull);
     overscroll-behavior: none;
   }
+  html {
+    background: var(--bg);
+  }
   body {
     font-family: 'Exo 2', sans-serif;
     background: var(--bg);
@@ -75,14 +78,14 @@
   .top-bar {
     position: fixed; top: 0; left: 0; right: 0;
     height: 56px;
-    background: var(--bar);
-    backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+    background: var(--bg);
     border-bottom: 1px solid var(--bar-border);
     display: flex; align-items: center;
     padding: 0 14px;
     z-index: 100;
     box-shadow: 0 2px 20px rgba(79,110,247,0.1);
     gap: 10px;
+    transition: background 0.4s;
   }
   .top-bar-logo {
     font-family: 'JetBrains Mono', monospace;
@@ -358,13 +361,13 @@
   .bottom-bar {
     position: fixed; bottom: 0; left: 0; right: 0;
     height: 60px;
-    background: var(--bar);
-    backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+    background: var(--bg);
     border-top: 1px solid var(--bar-border);
     display: flex; align-items: center; justify-content: space-around;
     z-index: 100;
     box-shadow: 0 -2px 20px rgba(79,110,247,0.08);
     padding: 0 4px 4px;
+    transition: background 0.4s;
   }
   .bar-btn {
     display: flex; flex-direction: column; align-items: center; justify-content: center;
@@ -676,17 +679,9 @@ function getSystemTheme(){ return window.matchMedia('(prefers-color-scheme: dark
 function applyTheme(t){
   document.documentElement.setAttribute('data-theme',t);
   document.getElementById('themeToggle').textContent = t==='dark'?'☀️':'🌙';
-  // inline style'ı temizle — arka planı CSS'e bırak
+  // inline style'ları temizle — tüm renkler CSS variable'lardan gelsin
   document.documentElement.style.background = '';
   document.body.style.background = '';
-  // status bar + tarayıcı chrome rengi
-  const bgColor = t==='dark'?'#080c1a':'#f0f4ff';
-  const m1 = document.getElementById('metaThemeColor');
-  const m2 = document.getElementById('metaBgColor');
-  const m3 = document.getElementById('metaAppleStatus');
-  if(m1) m1.setAttribute('content', bgColor);
-  if(m2) m2.setAttribute('content', bgColor);
-  if(m3) m3.setAttribute('content', t==='dark'?'black-translucent':'default');
 }
 function toggleTheme(){
   const next=document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark';
