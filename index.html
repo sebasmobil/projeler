@@ -7,6 +7,18 @@
 <meta name="background-color" content="#f0f4ff" id="metaBgColor">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default" id="metaAppleStatus">
+<script>
+(function(){
+  var t;try{t=localStorage.getItem('theme')}catch(e){}
+  if(!t) t=window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';
+  document.documentElement.setAttribute('data-theme',t);
+  var bg=t==='dark'?'#080c1a':'#f0f4ff';
+  var m=document.getElementById('metaThemeColor');
+  if(m)m.setAttribute('content',bg);
+  var m2=document.getElementById('metaBgColor');
+  if(m2)m2.setAttribute('content',bg);
+})();
+</script>
 <title>sebasmobil v1.0</title>
 <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;600;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
@@ -690,7 +702,7 @@ function applyTheme(t){
 function toggleTheme(){
   const next=document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark';
   try{localStorage.setItem('theme',next)}catch(e){}
-  applyTheme(next);
+  location.reload();
 }
 (function(){
   let saved; try{saved=localStorage.getItem('theme')}catch(e){}
