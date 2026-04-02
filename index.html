@@ -682,6 +682,10 @@ function applyTheme(t){
   // inline style'ları temizle — tüm renkler CSS variable'lardan gelsin
   document.documentElement.style.background = '';
   document.body.style.background = '';
+  // Safari'yi durum çubuğu rengini anlık güncellemesi için reflow zorla
+  document.body.style.display = 'none';
+  document.body.offsetHeight; // reflow tetikle
+  document.body.style.display = '';
 }
 function toggleTheme(){
   const next=document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark';
