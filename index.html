@@ -472,9 +472,70 @@
   ::-webkit-scrollbar { width:4px; }
   ::-webkit-scrollbar-track { background:transparent; }
   ::-webkit-scrollbar-thumb { background:var(--border);border-radius:2px; }
+
+  /* ══════════════════════════
+     GİRİŞ EKRANI
+     ══════════════════════════ */
+  #loginOverlay {
+    position: fixed; inset: 0; z-index: 9999;
+    background: var(--bg);
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    padding: 32px 24px;
+  }
+  #loginOverlay.hidden { display: none; }
+  .login-logo {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 26px; font-weight: 900;
+    background: linear-gradient(135deg, var(--accent), var(--accent2), var(--accent3));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text; margin-bottom: 6px; text-align: center;
+  }
+  .login-sub {
+    font-size: 12px; color: var(--text2); margin-bottom: 36px; text-align: center;
+  }
+  .login-field {
+    width: 100%; max-width: 320px;
+    background: var(--surface2); border: 1px solid var(--border);
+    border-radius: 14px; padding: 14px 16px;
+    font-family: 'Exo 2', sans-serif; font-size: 15px; font-weight: 600;
+    color: var(--text); outline: none; margin-bottom: 12px;
+    transition: border-color 0.25s, box-shadow 0.25s;
+    display: block;
+  }
+  .login-field:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(79,110,247,0.15);
+  }
+  .login-field::placeholder { color: var(--text2); font-weight: 400; }
+  .login-btn {
+    width: 100%; max-width: 320px;
+    padding: 14px; border-radius: 14px; border: none;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    color: white; font-family: 'Exo 2', sans-serif;
+    font-size: 15px; font-weight: 700; cursor: pointer;
+    margin-top: 4px; margin-bottom: 16px;
+    box-shadow: 0 4px 20px rgba(79,110,247,0.3);
+    transition: all 0.25s;
+  }
+  .login-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(79,110,247,0.4); }
+  .login-error {
+    font-size: 12px; color: #ef4444; font-weight: 600;
+    min-height: 18px; text-align: center;
+  }
 </style>
 </head>
 <body>
+
+<!-- GİRİŞ EKRANI -->
+<div id="loginOverlay">
+  <div class="login-logo">sebasmobil</div>
+  <div class="login-sub">Devam etmek için giriş yapın</div>
+  <input class="login-field" id="loginUser" type="text" placeholder="Kullanıcı adı" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+  <input class="login-field" id="loginPass" type="password" placeholder="Şifre" autocomplete="off">
+  <button class="login-btn" onclick="loginKontrol()">Giriş Yap</button>
+  <div class="login-error" id="loginError"></div>
+</div>
 
 <!-- TOP BAR: logo | spacer | greeting | theme -->
 <div class="top-bar">
@@ -636,6 +697,44 @@
 </div>
 
 <script>
+// ── Giriş Kontrolü (SHA-256 hash) ──
+async function sha256(str){
+  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
+  return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('');
+}
+const _u = 'ceef825134d22576b496c17f8429406ab6b753124a2fa15a76cb76f7eea1209b';
+const _p = '44c59909f17c296d6f2ec4a53efac3a951add75aa67616d9c5d9d2f5fbb44f04';
+
+async function loginKontrol(){
+  const u = document.getElementById('loginUser').value.trim();
+  const p = document.getElementById('loginPass').value;
+  const err = document.getElementById('loginError');
+  if(!u||!p){ err.textContent='Lütfen tüm alanları doldurun.'; return; }
+  const [hu, hp] = await Promise.all([sha256(u), sha256(p)]);
+  if(hu===_u && hp===_p){
+    try{localStorage.setItem('auth','1')}catch(e){}
+    document.getElementById('loginOverlay').classList.add('hidden');
+  } else {
+    err.textContent='Kullanıcı adı veya şifre hatalı.';
+    document.getElementById('loginPass').value='';
+  }
+}
+
+// Enter tuşu desteği
+document.addEventListener('DOMContentLoaded',function(){
+  ['loginUser','loginPass'].forEach(function(id){
+    document.getElementById(id).addEventListener('keydown',function(e){
+      if(e.key==='Enter') loginKontrol();
+    });
+  });
+  // Oturum kontrolü
+  try{
+    if(localStorage.getItem('auth')==='1'){
+      document.getElementById('loginOverlay').classList.add('hidden');
+    }
+  }catch(e){}
+});
+
 const APP_VERSION = 'v1.0';
 
 const apps = {
