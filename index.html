@@ -150,6 +150,9 @@
      HOME CARDS
      ══════════════════════════ */
   .cards-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 11px; margin-bottom: 20px; }
+  @media (min-width: 480px) {
+    .cards-grid { grid-template-columns: repeat(auto-fill, 200px); }
+  }
   .app-card {
     background: var(--card-bg); border: 1px solid var(--border);
     border-radius: 18px; padding: 14px 13px;
@@ -186,11 +189,13 @@
   .card-icon { width:38px;height:38px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:19px;margin-bottom:9px; }
   .card-icon-edu { background: linear-gradient(135deg,rgba(79,110,247,0.2),rgba(124,58,237,0.2)); }
   .card-icon-ent { background: linear-gradient(135deg,rgba(6,182,212,0.2),rgba(16,185,129,0.2)); }
+  .card-icon-game { background: linear-gradient(135deg,rgba(239,68,68,0.2),rgba(249,115,22,0.2)); }
   .card-name { font-size:13px;font-weight:700;color:var(--text);margin-bottom:4px;line-height:1.2; }
   .card-desc { font-size:10px;color:var(--text2);line-height:1.45;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden; }
   .card-tag { display:inline-block;font-size:9px;font-weight:700;letter-spacing:0.8px;text-transform:uppercase;padding:2px 7px;border-radius:6px;margin-top:8px; }
   .card-tag-edu { background:rgba(79,110,247,0.12);color:var(--accent); }
   .card-tag-ent { background:rgba(6,182,212,0.12);color:var(--accent3); }
+  .card-tag-game { background:rgba(239,68,68,0.12);color:#ef4444; }
   .card-tag-dev { background:rgba(245,158,11,0.15);color:#f59e0b; }
 
   /* ══════════════════════════
@@ -242,6 +247,7 @@
   }
   .tile-icon-edu { background: linear-gradient(135deg,rgba(79,110,247,0.18),rgba(124,58,237,0.18)); }
   .tile-icon-ent { background: linear-gradient(135deg,rgba(6,182,212,0.18),rgba(16,185,129,0.18)); }
+  .tile-icon-game { background: linear-gradient(135deg,rgba(239,68,68,0.18),rgba(249,115,22,0.18)); }
   .tile-name { font-size: 10px; font-weight: 700; text-align: center; color: var(--text); line-height: 1.2; padding: 0 5px; }
   .tile-badge {
     position: absolute; top: 7px; right: 7px;
@@ -557,6 +563,10 @@
       <div class="category-title">🎵 Eğlence</div>
       <div class="cards-grid" id="home-ent-grid"></div>
     </div>
+    <div class="category-section">
+      <div class="category-title">🕹️ Oyunlar</div>
+      <div class="cards-grid" id="home-game-grid"></div>
+    </div>
   </div>
 
   <!-- APPS -->
@@ -569,6 +579,10 @@
     <div class="apps-category-section">
       <div class="apps-category-label">🎵 Eğlence</div>
       <div class="apps-grid" id="apps-ent-grid"></div>
+    </div>
+    <div class="apps-category-section">
+      <div class="apps-category-label">🕹️ Oyunlar</div>
+      <div class="apps-grid" id="apps-game-grid"></div>
     </div>
   </div>
 
@@ -591,9 +605,11 @@
         <div class="about-pill-row">
           <div class="about-pill"><span>👩‍🏫</span> S-Öğretmen</div>
           <div class="about-pill"><span>📝</span> S-Sınav</div>
-          <div class="about-pill"><span>🎯</span> S-Seçim</div>
+          <div class="about-pill"><span>🎯</span> S-Katılım</div>
           <div class="about-pill"><span>📦</span> S-Dağıtım</div>
           <div class="about-pill"><span>🎵</span> S-Müzik</div>
+          <div class="about-pill"><span>🀄</span> S-Okey101</div>
+          <div class="about-pill"><span>🕹️</span> Oyunlar (8)</div>
         </div>
       </div>
 
@@ -679,9 +695,11 @@
   <div class="news-content">
     <div class="news-item"><div class="news-item-dot"></div><div class="news-item-text"><strong>S-Öğretmen</strong> uygulaması eklendi — sosyal kulüp, sınıf rehberliği, ders programı ve not çizelgesi veri girişi <span class="news-item-tag">YENİ</span></div></div>
     <div class="news-item"><div class="news-item-dot"></div><div class="news-item-text"><strong>S-Sınav</strong> uygulaması eklendi — fotoğraf tabanlı yazılı sınav kağıdı hazırlama aracı <span class="news-item-tag">YENİ</span></div></div>
-    <div class="news-item"><div class="news-item-dot"></div><div class="news-item-text"><strong>S-Seçim</strong> uygulaması eklendi — sınıfta rastgele öğrenci seçici <span class="news-item-tag">YENİ</span></div></div>
+    <div class="news-item"><div class="news-item-dot"></div><div class="news-item-text"><strong>S-Katılım</strong> uygulaması eklendi — sınıfta rastgele öğrenci seçici <span class="news-item-tag">YENİ</span></div></div>
     <div class="news-item"><div class="news-item-dot"></div><div class="news-item-text"><strong>S-Dağıtım</strong> uygulaması geliştirme aşamasında eklendi — öğretmen/sınıf ders programı oluşturma aracı <span class="news-item-tag beta">BETA</span></div></div>
     <div class="news-item"><div class="news-item-dot"></div><div class="news-item-text"><strong>S-Müzik</strong> eğlence kategorisine eklendi <span class="news-item-tag">YENİ</span></div></div>
+    <div class="news-item"><div class="news-item-dot"></div><div class="news-item-text"><strong>S-Okey101</strong> uygulaması eklendi — okey ve 101 için çetele tutma aracı <span class="news-item-tag">YENİ</span></div></div>
+    <div class="news-item"><div class="news-item-dot"></div><div class="news-item-text"><strong>🕹️ Oyunlar</strong> kategorisi eklendi — Sudoku, Satranç, Yılan, Dama ve daha fazlası <span class="news-item-tag">YENİ</span></div></div>
     <div class="news-item"><div class="news-item-dot"></div><div class="news-item-text">Karanlık / Aydınlık tema, cihaz temasını otomatik takip ediyor</div></div>
     <div class="news-item"><div class="news-item-dot"></div><div class="news-item-text">Uygulama sıralaması kaydediliyor — sürükleyerek yeniden sıralayabilirsiniz</div></div>
     <div class="news-item"><div class="news-item-dot"></div><div class="news-item-text">Tüm uygulamalar <strong>GNU AGPL v3.0</strong> lisansıyla yayınlandı — özgür, açık kaynak <span class="news-item-tag">LİSANS</span></div></div>
@@ -752,7 +770,7 @@ const apps = {
       desc: 'Öğretmenlerin fotoğraf tabanlı sorularla yazılı sınav kağıtları hazırlamasını sağlar. Soru görsellerini yükleyerek hızlı ve pratik bir şekilde sınav oluşturur. Görsel içeriklerle zengin sınav hazırlığına olanak tanır, internet bağlantısı gerektirmez.'
     },
     {
-      id: 'ssecim', name: 'S-Seçim', icon: '🎯', cat: 'edu', dev: false,
+      id: 'skatilim', name: 'S-Katılım', icon: '🎯', cat: 'edu', dev: false,
       url: 'https://sebasmobil.github.io/ogrenci-secici/',
       short: 'Rastgele öğrenci seçici aracı',
       desc: 'Sınıfta öğrencileri adil ve eğlenceli bir şekilde rastgele seçin. Animasyonlu ve interaktif arayüzü ile dersi canlandırır. Sınıf listesi kaydedilebilir, her oturumda hazır gelir.'
@@ -770,6 +788,62 @@ const apps = {
       url: 'https://sebasmobil.github.io/s-muzik/',
       short: 'Eğlenceli müzik deneyimi',
       desc: 'Müzik keşfedin, çalma listeleri oluşturun ve müzikle eğlenin. Sezgisel arayüzü ile dinleme deneyiminizi zenginleştirir.'
+    },
+    {
+      id: 'sokey101', name: 'S-Okey101', icon: '🀄', cat: 'ent', dev: false,
+      url: 'https://sebasmobil.github.io/oyun/okey101.html',
+      short: 'Okey ve 101 için çetele tutma aracı',
+      desc: 'Okey veya 101 oyunlarında oyuncu puanlarını kolayca takip etmenizi sağlayan çetele uygulamasıdır. Oyuncu ekleme, puan girişi ve skor takibini pratik bir arayüzle sunar.'
+    }
+  ],
+  game: [
+    {
+      id: 'sudoku', name: 'Sudoku', icon: '🔢', cat: 'game', dev: false,
+      url: 'https://sebasmobil.github.io/oyun/sudoku.html',
+      short: 'Klasik Sudoku bulmacası',
+      desc: 'Sayı mantığına dayalı klasik Sudoku bulmacası. Farklı zorluk seviyeleriyle hem başlangıç hem de ileri düzey oyuncular için uygundur.'
+    },
+    {
+      id: 'satranc', name: 'Satranç', icon: '♟️', cat: 'game', dev: false,
+      url: 'https://sebasmobil.github.io/oyun/satranc.html',
+      short: 'Strateji tahtası: satranç oyunu',
+      desc: 'Klasik satranç oyununu mobil cihazınızda oynayın. Strateji ve zihin geliştirme odaklı, sezgisel bir arayüzle sunulmuştur.'
+    },
+    {
+      id: 'matematik', name: 'Matematik', icon: '➕', cat: 'game', dev: false,
+      url: 'https://sebasmobil.github.io/oyun/matematik.html',
+      short: 'Eğlenceli matematik işlemleri oyunu',
+      desc: 'Dört işlem becerilerini eğlenceli sorularla pekiştirin. Hız ve doğruluk odaklı matematik oyunu, her yaş için uygundur.'
+    },
+    {
+      id: 'yilan', name: 'Yılan', icon: '🐍', cat: 'game', dev: false,
+      url: 'https://sebasmobil.github.io/oyun/yilan.html',
+      short: 'Klasik yılan oyunu',
+      desc: 'Efsanevi yılan oyununun modern versiyonu. Yılanı yönlendirin, büyütün ve rekor kırmaya çalışın.'
+    },
+    {
+      id: 'hafiza', name: 'Hafıza Kartı', icon: '🃏', cat: 'game', dev: false,
+      url: 'https://sebasmobil.github.io/oyun/hafiza.html',
+      short: 'Eşleştirme tabanlı hafıza kart oyunu',
+      desc: 'Kartları çevirerek eşleşen çiftleri bulun. Konsantrasyon ve hafızayı geliştiren klasik kart oyunu.'
+    },
+    {
+      id: 'kelimeavcisi', name: 'Kelime Avcısı', icon: '🔤', cat: 'game', dev: false,
+      url: 'https://sebasmobil.github.io/oyun/kelime-avcisi.html',
+      short: 'Kelime bulma ve tahmin oyunu',
+      desc: 'Harfleri birleştirerek gizli kelimeleri bulun. Sözcük dağarcığını geliştiren ve eğlenceli vakit geçirmenizi sağlayan kelime oyunu.'
+    },
+    {
+      id: 'dama', name: 'Dama', icon: '⚫', cat: 'game', dev: false,
+      url: 'https://sebasmobil.github.io/oyun/dama.html',
+      short: 'Klasik dama tahtası oyunu',
+      desc: 'Türk dama kurallarıyla oynanan klasik masa oyunu. Rakibinizin taşlarını yiyerek tahtaya hâkim olun.'
+    },
+    {
+      id: 'numarayakala', name: 'Numara Yakala', icon: '🎯', cat: 'game', dev: false,
+      url: 'https://sebasmobil.github.io/oyun/numara.html',
+      short: 'Sayı tahmin ve refleks oyunu',
+      desc: 'Beliren sayıları hızlıca yakalayın. Refleks ve dikkat becerilerinizi test eden hızlı tempolu bir oyun.'
     }
   ]
 };
@@ -833,7 +907,7 @@ updateGreeting(); setInterval(updateGreeting, 60000);
 
 // ── Home cards ──
 function renderHomeCards(){
-  ['edu','ent'].forEach(cat=>{
+  ['edu','ent','game'].forEach(cat=>{
     const grid=document.getElementById('home-'+cat+'-grid');
     grid.innerHTML='';
     applyOrder(apps[cat],cat).forEach(app=>grid.appendChild(createHomeCard(app)));
@@ -843,16 +917,16 @@ function createHomeCard(app){
   const div=document.createElement('div');
   div.className='app-card glow-card';
   div.onclick=()=>openModal(app);
-  const tc=app.dev?'card-tag-dev':(app.cat==='edu'?'card-tag-edu':'card-tag-ent');
-  const tt=app.dev?'Geliştiriliyor':(app.cat==='edu'?'Eğitim':'Eğlence');
-  const ic=app.cat==='edu'?'card-icon-edu':'card-icon-ent';
+  const tc=app.dev?'card-tag-dev':(app.cat==='edu'?'card-tag-edu':app.cat==='game'?'card-tag-game':'card-tag-ent');
+  const tt=app.dev?'Geliştiriliyor':(app.cat==='edu'?'Eğitim':app.cat==='game'?'Oyun':'Eğlence');
+  const ic=app.cat==='edu'?'card-icon-edu':app.cat==='game'?'card-icon-game':'card-icon-ent';
   div.innerHTML=`<div class="card-icon ${ic}">${app.icon}</div><div class="card-name">${app.name}</div><div class="card-desc">${app.short}</div><span class="card-tag ${tc}">${tt}</span>`;
   return div;
 }
 
 // ── Modal ──
 function openModal(app){
-  const ic=app.cat==='edu'?'card-icon-edu':'card-icon-ent';
+  const ic=app.cat==='edu'?'card-icon-edu':app.cat==='game'?'card-icon-game':'card-icon-ent';
   const warn=app.dev?`<div class="modal-warning">⚠️ <span>Bu uygulama henüz geliştirme aşamasındadır. Şu an için düzgün kullanım mümkün olmayabilir; yalnızca geliştirme sürecine yönelik erişim sağlanmaktadır.</span></div>`:'';
   document.getElementById('modalContent').innerHTML=`
     <div class="modal-icon ${ic}">${app.icon}</div>
@@ -873,6 +947,7 @@ function closeModal(e){
 function renderAppsPage(){
   renderTileGrid('apps-edu-grid',apps.edu,'edu');
   renderTileGrid('apps-ent-grid',apps.ent,'ent');
+  renderTileGrid('apps-game-grid',apps.game,'game');
 }
 function renderTileGrid(gridId,appList,cat){
   const grid=document.getElementById(gridId);
@@ -882,7 +957,7 @@ function renderTileGrid(gridId,appList,cat){
     a.className='app-tile';
     a.href=app.url; a.target='_blank'; a.rel='noopener';
     a.draggable=true; a.dataset.id=app.id; a.dataset.cat=cat;
-    const ic=cat==='edu'?'tile-icon-edu':'tile-icon-ent';
+    const ic=cat==='edu'?'tile-icon-edu':cat==='game'?'tile-icon-game':'tile-icon-ent';
     a.innerHTML=`${app.dev?'<span class="tile-badge">BETA</span>':''}<div class="tile-icon ${ic}">${app.icon}</div><div class="tile-name">${app.name}</div>`;
     setupDrag(a,cat);
     grid.appendChild(a);
