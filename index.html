@@ -629,7 +629,7 @@
 <div class="top-bar">
   <div class="top-bar-logo">sebasmobil <span>v1.1</span></div>
   <div class="top-bar-spacer"></div>
-  <div class="top-bar-greeting" id="greetingText">Günaydın! ☀️</div>
+  <div class="top-bar-greeting" id="greetingText">günaydın! ☀️</div>
   <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()">🌙</button>
   <button class="logout-btn" onclick="cikisYap()" title="Çıkış Yap">
     <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
@@ -824,7 +824,7 @@ async function sha256(str){
   return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('');
 }
 const _u = 'ceef825134d22576b496c17f8429406ab6b753124a2fa15a76cb76f7eea1209b';
-const _p = '44c59909f17c296d6f2ec4a53efac3a951add75aa67616d9c5d9d2f5fbb44f04';
+const _p = '46e73ad899f467b2e3132e0f91cd381f57b932c033c4ef7d6a3a210878c2aebb';
 
 async function loginKontrol(){
   const u = document.getElementById('loginUser').value.trim();
@@ -1023,11 +1023,11 @@ function updateGreeting(){
   const h = trTime.getHours();
 
   let msg;
-  if      (h >= 5  && h < 12) msg = 'Günaydın! ☀️';
-  else if (h >= 12 && h < 14) msg = 'Tünaydın! 🌤️';
-  else if (h >= 14 && h < 18) msg = 'İyi günler! 🌤️';
-  else if (h >= 18 && h < 22) msg = 'İyi akşamlar! 🌆';
-  else                         msg = 'İyi geceler! 🌙';
+  if      (h >= 5  && h < 12) msg = 'günaydın! ☀️';
+  else if (h >= 12 && h < 14) msg = 'tünaydın! 🌤️';
+  else if (h >= 14 && h < 18) msg = 'iyi günler! 🌤️';
+  else if (h >= 18 && h < 22) msg = 'iyi akşamlar! 🌆';
+  else                         msg = 'iyi geceler! 🌙';
   document.getElementById('greetingText').textContent = msg;
 }
 updateGreeting(); setInterval(updateGreeting, 60000);
