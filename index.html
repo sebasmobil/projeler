@@ -830,42 +830,58 @@
 </div>
 
 <script>
-// ── Giriş Kontrolü (SHA-256 hash) ──
-async function sha256(str){
-  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
-  return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('');
-}
-const _u = 'ceef825134d22576b496c17f8429406ab6b753124a2fa15a76cb76f7eea1209b';
-const _p = '46e73ad899f467b2e3132e0f91cd381f57b932c033c4ef7d6a3a210878c2aebb';
-
-async function loginKontrol(){
-  const u = document.getElementById('loginUser').value.trim();
-  const p = document.getElementById('loginPass').value;
-  const err = document.getElementById('loginError');
-  if(!u||!p){ err.textContent='Lütfen tüm alanları doldurun.'; return; }
-  const [hu, hp] = await Promise.all([sha256(u), sha256(p)]);
-  if(hu===_u && hp===_p){
-    try{localStorage.setItem('auth','1')}catch(e){}
-    document.getElementById('loginOverlay').classList.add('hidden');
-  } else {
-    err.textContent='Kullanıcı adı veya şifre hatalı.';
-    document.getElementById('loginPass').value='';
+// ── Giriş Kontrolü ──
+function simpleHash(str){
+  var h1=0xdeadbeef,h2=0x41c6ce57;
+  for(var i=0;i<str.length;i++){
+    var ch=str.charCodeAt(i);
+    h1=Math.imul(h1^ch,2654435761);
+    h2=Math.imul(h2^ch,1597334677);
   }
+  h1=Math.imul(h1^(h1>>>16),2246822507)^Math.imul(h2^(h2>>>13),3266489909);
+  h2=Math.imul(h2^(h2>>>16),2246822507)^Math.imul(h1^(h1>>>13),3266489909);
+  var r=(4294967296*(2097151&h2)+h1>>>0).toString(16);
+  // ikinci tur
+  var h3=0,h4=0;
+  for(var j=0;j<str.length;j++){
+    h3=(Math.imul(31,h3)+str.charCodeAt(j))|0;
+    h4=(Math.imul(37,h4)+str.charCodeAt(j))|0;
+  }
+  return r + (h3>>>0).toString(16).padStart(8,'0') + (h4>>>0).toString(16).padStart(8,'0');
+}
+const _u = simpleHash('sebas');
+const _p = simpleHash('sebasmobil2026');
+
+function loginKontrol(){
+  try{
+    var u=document.getElementById('loginUser').value.trim();
+    var p=document.getElementById('loginPass').value;
+    var err=document.getElementById('loginError');
+    if(!u||!p){err.textContent='Lütfen tüm alanları doldurun.';return;}
+    if(simpleHash(u)===_u&&simpleHash(p)===_p){
+      try{localStorage.setItem('auth','1')}catch(e){}
+      document.getElementById('loginOverlay').classList.add('hidden');
+    }else{
+      err.textContent='Kullanıcı adı veya şifre hatalı.';
+      document.getElementById('loginPass').value='';
+    }
+  }catch(e){alert('Hata: '+e.message);}
 }
 
-// Enter tuşu desteği
-document.addEventListener('DOMContentLoaded',function(){
+// ── Init ──
+document.addEventListener('DOMContentLoaded', function(){
+  // Enter tuşu
   ['loginUser','loginPass'].forEach(function(id){
-    document.getElementById(id).addEventListener('keydown',function(e){
-      if(e.key==='Enter') loginKontrol();
-    });
+    var el=document.getElementById(id);
+    if(el) el.addEventListener('keydown',function(e){ if(e.key==='Enter') loginKontrol(); });
   });
   // Oturum kontrolü
-  try{
-    if(localStorage.getItem('auth')==='1'){
-      document.getElementById('loginOverlay').classList.add('hidden');
-    }
-  }catch(e){}
+  try{ if(localStorage.getItem('auth')==='1') document.getElementById('loginOverlay').classList.add('hidden'); }catch(e){}
+  // Uygulama başlatma
+  try{ renderHomeCards(); }catch(e){}
+  try{ renderAppsPage(); }catch(e){}
+  try{ initView(); }catch(e){}
+  try{ checkNews(); }catch(e){}
 });
 
 const APP_VERSION = 'v1.0.01';
@@ -1170,13 +1186,6 @@ window.addEventListener('orientationchange', function(){
   }
 });
 
-// ── Init ──
-document.addEventListener('DOMContentLoaded', function(){
-  renderHomeCards();
-  renderAppsPage();
-  initView();
-  checkNews();
-});
 </script>
 </body>
 </html>
