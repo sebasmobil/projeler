@@ -30,6 +30,7 @@
   --card-hover:#151f32;
   --radius:    16px;
   --shadow:    0 2px 20px rgba(0,0,0,0.5);
+  --header-bg: rgba(8,11,18,0.82);
   --noise: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
 }
 
@@ -53,6 +54,7 @@
   --card:      #ffffff;
   --card-hover:#f7f9ff;
   --shadow:    0 2px 20px rgba(0,0,40,0.08);
+  --header-bg: rgba(226,229,245,0.95);
 }
 
 /* ── ACCENT COLOR THEMES ── */
@@ -110,16 +112,15 @@ body::before {
 header {
   position: sticky; top: 0; z-index: 200;
   height: 48px;
-  background: rgba(8,11,18,0.82);
+  background: var(--header-bg);
   backdrop-filter: blur(24px) saturate(160%);
   border-bottom: 1px solid var(--border);
   display: flex; align-items: center;
   padding: 0 clamp(16px,4vw,60px);
   gap: 12px;
-  transition: background 0.4s;
+  transition: background 0.4s, border-color 0.4s, box-shadow 0.4s;
 }
 [data-theme="light"] header {
-  background: rgba(226,229,245,0.95);
   border-bottom-color: rgba(0,0,0,0.1);
   box-shadow: 0 1px 0 rgba(0,0,0,0.06);
 }
@@ -883,7 +884,7 @@ footer {
         <div class="info-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
         <div>
           <div class="info-lbl">Sürüm</div>
-          <div class="info-val">v1.0.01 — Tüm haklar saklıdır</div>
+          <div class="info-val">v1.0.02 — Tüm haklar saklıdır</div>
         </div>
       </div>
     </div>
