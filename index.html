@@ -1,1191 +1,1091 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="tr" data-theme="dark">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#f0f4ff" id="metaThemeColor">
-<meta name="background-color" content="#f0f4ff" id="metaBgColor">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="default" id="metaAppleStatus">
-<script>
-(function(){
-  var t;try{t=localStorage.getItem('theme')}catch(e){}
-  if(!t) t=window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';
-  document.documentElement.setAttribute('data-theme',t);
-  var bg=t==='dark'?'#080c1a':'#f0f4ff';
-  var m=document.getElementById('metaThemeColor');
-  if(m)m.setAttribute('content',bg);
-  var m2=document.getElementById('metaBgColor');
-  if(m2)m2.setAttribute('content',bg);
-})();
-</script>
-<title>sebasmobil v1.0.01</title>
-<link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;600;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<title>sebasmobil — Ücretsiz Web Uygulamaları</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&family=Syne:wght@700;800&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --bg: #f0f4ff;
-    --bg-pull: #dde5ff;
-    --surface: #ffffff;
-    --surface2: #f5f7ff;
-    --border: rgba(80,120,255,0.15);
-    --text: #1a1f3c;
-    --text2: #4a5080;
-    --accent: #4f6ef7;
-    --accent2: #7c3aed;
-    --accent3: #06b6d4;
-    --neon1: rgba(79,110,247,0.5);
-    --neon2: rgba(124,58,237,0.5);
-    --bar: rgba(240,244,255,0.96);
-    --bar-border: rgba(79,110,247,0.2);
-    --card-bg: #ffffff;
-  }
-  [data-theme="dark"] {
-    --bg: #080c1a;
-    --bg-pull: #05080f;
-    --surface: #111827;
-    --surface2: #1a2035;
-    --border: rgba(79,110,247,0.2);
-    --text: #e8eeff;
-    --text2: #8892b0;
-    --accent: #6c8fff;
-    --accent2: #a78bfa;
-    --accent3: #22d3ee;
-    --neon1: rgba(79,110,247,0.6);
-    --neon2: rgba(124,58,237,0.6);
-    --bar: rgba(8,12,26,0.97);
-    --bar-border: rgba(79,110,247,0.25);
-    --card-bg: #111827;
-  }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-  * { box-sizing: border-box; margin: 0; padding: 0; }
+/* ── DARK THEME ── */
+:root {
+  --bg:        #080b12;
+  --bg2:       #0d1120;
+  --surface:   #111827;
+  --surface2:  #1a2133;
+  --border:    rgba(255,255,255,0.07);
+  --border2:   rgba(255,255,255,0.12);
+  --text:      #f0f4ff;
+  --text2:     #7c85a8;
+  --text3:     #3d4566;
+  --accent:    #5b8eff;
+  --accent2:   #9d6eff;
+  --accent3:   #00e5a0;
+  --red:       #ff6b6b;
+  --amber:     #ffb83f;
+  --glow1:     rgba(91,142,255,0.15);
+  --glow2:     rgba(157,110,255,0.12);
+  --card:      #111827;
+  --card-hover:#151f32;
+  --radius:    16px;
+  --shadow:    0 2px 20px rgba(0,0,0,0.5);
+  --noise: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+}
 
-  html, body {
-    background: var(--bg-pull);
-    overscroll-behavior: none;
-  }
-  html {
-    background: var(--bg);
-  }
-  body {
-    font-family: 'Exo 2', sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    min-height: 100vh;
-    transition: background 0.4s, color 0.4s;
-    overflow-x: hidden;
-  }
-  body::before {
-    content: '';
-    position: fixed; inset: 0;
-    background:
-      radial-gradient(ellipse 60% 50% at 20% 20%, rgba(79,110,247,0.08) 0%, transparent 70%),
-      radial-gradient(ellipse 50% 40% at 80% 80%, rgba(124,58,237,0.07) 0%, transparent 70%),
-      radial-gradient(ellipse 40% 60% at 60% 40%, rgba(6,182,212,0.05) 0%, transparent 70%);
-    pointer-events: none; z-index: 0;
-  }
+[data-theme="light"] {
+  --bg:        #f5f7ff;
+  --bg2:       #eceffe;
+  --surface:   #ffffff;
+  --surface2:  #f0f3ff;
+  --border:    rgba(0,0,0,0.07);
+  --border2:   rgba(0,0,0,0.13);
+  --text:      #0d1120;
+  --text2:     #5a6385;
+  --text3:     #aab0cc;
+  --accent:    #3a6ef5;
+  --accent2:   #7c4de8;
+  --accent3:   #00b57d;
+  --red:       #e84040;
+  --amber:     #d4900a;
+  --glow1:     rgba(58,110,245,0.12);
+  --glow2:     rgba(124,77,232,0.09);
+  --card:      #ffffff;
+  --card-hover:#f7f9ff;
+  --shadow:    0 2px 20px rgba(0,0,40,0.08);
+}
 
-  /* ══════════════════════════
-     TOP BAR (logo + greeting + theme)
-     ══════════════════════════ */
-  .top-bar {
-    position: fixed; top: 0; left: 0; right: 0;
-    height: 56px;
-    background: var(--bg);
-    border-bottom: 1px solid var(--bar-border);
-    display: flex; align-items: center;
-    padding: 0 14px;
-    z-index: 100;
-    box-shadow: 0 2px 20px rgba(79,110,247,0.1);
-    gap: 10px;
-    transition: background 0.4s;
-  }
-  .top-bar-logo {
-    font-family: 'JetBrains Mono', monospace;
-    font-weight: 700; font-size: 14px;
-    color: var(--accent); letter-spacing: -0.5px;
-    white-space: nowrap;
-  }
-  .top-bar-logo span { color: var(--text2); font-weight: 400; font-size: 11px; margin-left: 3px; }
-  .top-bar-spacer { flex: 1; }
-  .top-bar-greeting {
-    font-size: 12px; font-weight: 700;
-    color: var(--text2);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: 160px;
-  }
-  .theme-toggle {
-    background: var(--surface2); border: 1px solid var(--border);
-    border-radius: 20px; padding: 4px 10px;
-    cursor: pointer; font-size: 14px;
-    transition: all 0.25s; color: var(--text);
-    flex-shrink: 0;
-  }
-  .theme-toggle:hover { border-color: var(--accent); box-shadow: 0 0 10px var(--neon1); }
-  .logout-btn {
-    background: transparent; border: 1px solid var(--border);
-    border-radius: 20px; padding: 4px 10px;
-    cursor: pointer; font-size: 13px; color: var(--text2);
-    transition: all 0.25s; flex-shrink: 0;
-    display: flex; align-items: center; gap: 4px;
-    font-family: 'Exo 2', sans-serif; font-weight: 600;
-  }
-  .logout-btn:hover { border-color: #ef4444; color: #ef4444; box-shadow: 0 0 10px rgba(239,68,68,0.25); }
+/* ── ACCENT COLOR THEMES ── */
+[data-color="blue"]  { --accent:#5b8eff; --accent2:#9d6eff; --accent3:#00e5a0; --glow1:rgba(91,142,255,0.15); --glow2:rgba(157,110,255,0.12); }
+[data-color="rose"]  { --accent:#ff6b9d; --accent2:#ff4d6d; --accent3:#ffd166; --glow1:rgba(255,107,157,0.15); --glow2:rgba(255,77,109,0.12); }
+[data-color="amber"] { --accent:#f59e0b; --accent2:#ef4444; --accent3:#84cc16; --glow1:rgba(245,158,11,0.15);  --glow2:rgba(239,68,68,0.12); }
+[data-color="green"] { --accent:#10b981; --accent2:#06b6d4; --accent3:#a3e635; --glow1:rgba(16,185,129,0.15); --glow2:rgba(6,182,212,0.12); }
+[data-color="purple"]{ --accent:#a855f7; --accent2:#ec4899; --accent3:#38bdf8; --glow1:rgba(168,85,247,0.15); --glow2:rgba(236,72,153,0.12); }
+[data-color="cyan"]  { --accent:#22d3ee; --accent2:#818cf8; --accent3:#fb7185; --glow1:rgba(34,211,238,0.15); --glow2:rgba(129,140,248,0.12); }
+[data-color="orange"]{ --accent:#fb923c; --accent2:#f43f5e; --accent3:#facc15; --glow1:rgba(251,146,60,0.15);  --glow2:rgba(244,63,94,0.12); }
+[data-color="mono"]  { --accent:#e2e8f0; --accent2:#94a3b8; --accent3:#64748b; --glow1:rgba(226,232,240,0.1);  --glow2:rgba(148,163,184,0.08); }
 
-  /* ══════════════════════════
-     MAIN
-     ══════════════════════════ */
-  main { padding-top: 64px; padding-bottom: 68px; position: relative; z-index: 1; }
-  .page { display: none; }
-  .page.active { display: block; }
+[data-theme="light"][data-color="blue"]  { --accent:#3a6ef5; --accent2:#7c4de8; --accent3:#00b57d; --glow1:rgba(58,110,245,0.12); --glow2:rgba(124,77,232,0.09); }
+[data-theme="light"][data-color="rose"]  { --accent:#e11d78; --accent2:#be123c; --accent3:#ca8a04; --glow1:rgba(225,29,120,0.1);   --glow2:rgba(190,18,60,0.08); }
+[data-theme="light"][data-color="amber"] { --accent:#d97706; --accent2:#dc2626; --accent3:#65a30d; --glow1:rgba(217,119,6,0.1);    --glow2:rgba(220,38,38,0.08); }
+[data-theme="light"][data-color="green"] { --accent:#059669; --accent2:#0891b2; --accent3:#65a30d; --glow1:rgba(5,150,105,0.1);    --glow2:rgba(8,145,178,0.08); }
+[data-theme="light"][data-color="purple"]{ --accent:#9333ea; --accent2:#db2777; --accent3:#0284c7; --glow1:rgba(147,51,234,0.1);   --glow2:rgba(219,39,119,0.08); }
+[data-theme="light"][data-color="cyan"]  { --accent:#0891b2; --accent2:#4f46e5; --accent3:#e11d48; --glow1:rgba(8,145,178,0.1);    --glow2:rgba(79,70,229,0.08); }
+[data-theme="light"][data-color="orange"]{ --accent:#ea580c; --accent2:#e11d48; --accent3:#ca8a04; --glow1:rgba(234,88,12,0.1);    --glow2:rgba(225,29,72,0.08); }
+[data-theme="light"][data-color="mono"]  { --accent:#334155; --accent2:#64748b; --accent3:#94a3b8; --glow1:rgba(51,65,85,0.08);    --glow2:rgba(100,116,139,0.06); }
 
-  /* ══════════════════════════
-     CATEGORY HEADER
-     ══════════════════════════ */
-  .category-section { padding: 16px 14px 4px; }
-  .category-title {
-    font-size: 10px; font-weight: 700; letter-spacing: 2px;
-    text-transform: uppercase; color: var(--text2);
-    margin-bottom: 12px; padding-left: 4px;
-    display: flex; align-items: center; gap: 8px;
-  }
-  .category-title::before {
-    content: ''; display: inline-block; width: 3px; height: 13px;
-    border-radius: 2px; background: linear-gradient(to bottom, var(--accent), var(--accent2));
-  }
+body {
+  font-family: 'Space Grotesk', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  overflow-x: hidden;
+  transition: background 0.4s, color 0.4s;
+}
 
-  /* ══════════════════════════
-     HOME CARDS
-     ══════════════════════════ */
-  .cards-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 11px; margin-bottom: 20px; }
-  @media (min-width: 480px) {
-    .cards-grid { grid-template-columns: repeat(auto-fill, 200px); }
-  }
-  .app-card {
-    background: var(--card-bg); border: 1.5px solid var(--border);
-    border-radius: 20px; padding: 16px 14px;
-    cursor: pointer; position: relative; overflow: hidden;
-    transition: all 0.3s cubic-bezier(0.34,1.56,0.64,1);
-    animation: cardIn 0.5s ease both, glowPulse 4s ease-in-out infinite;
-    box-shadow: 0 4px 16px rgba(79,110,247,0.10), 0 2px 6px rgba(0,0,0,0.06);
-  }
-  .app-card::before {
-    content: ''; position: absolute; inset: -1px; border-radius: 20px; padding: 1px;
-    background: linear-gradient(135deg, var(--accent), var(--accent2), var(--accent3));
-    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor; mask-composite: exclude;
-    opacity: 0; transition: opacity 0.3s;
-  }
-  .app-card::after {
-    content: ''; position: absolute; inset: 0; border-radius: 20px;
-    box-shadow: 0 0 20px var(--neon1), 0 0 40px var(--neon2);
-    opacity: 0; transition: opacity 0.4s; pointer-events: none;
-  }
-  .app-card:hover { transform: translateY(-3px) scale(1.02); border-color: transparent; box-shadow: 0 8px 28px rgba(79,110,247,0.22); }
-  .app-card:hover::before { opacity: 1; }
-  .app-card:hover::after  { opacity: 0.4; }
+/* ── GRID BACKGROUND ── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-image:
+    linear-gradient(var(--border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse 80% 80% at 50% 0%, black 30%, transparent 100%);
+}
 
-  @keyframes glowPulse {
-    0%,100% { box-shadow: 0 4px 14px rgba(79,110,247,0.13), 0 0 0px rgba(124,58,237,0); }
-    50%      { box-shadow: 0 4px 22px rgba(79,110,247,0.28), 0 0 32px rgba(124,58,237,0.14); }
-  }
-  .glow-card { animation: cardIn 0.5s ease both, glowPulse 4s ease-in-out infinite; }
+/* ── GLOWS ── */
+.glow-blob {
+  position: fixed; border-radius: 50%;
+  pointer-events: none; z-index: 0;
+  filter: blur(120px);
+}
+.glow1 { width: 600px; height: 600px; top: -200px; left: -150px; background: var(--glow1); opacity: 0.7; }
+.glow2 { width: 500px; height: 500px; bottom: -180px; right: -120px; background: var(--glow2); opacity: 0.6; }
 
-  @keyframes cardIn { from{opacity:0;transform:translateY(14px)} to{opacity:1;transform:translateY(0)} }
-  .app-card:nth-child(1){animation-delay:0.05s} .app-card:nth-child(2){animation-delay:0.10s}
-  .app-card:nth-child(3){animation-delay:0.15s} .app-card:nth-child(4){animation-delay:0.20s}
+/* ── HEADER ── */
+header {
+  position: sticky; top: 0; z-index: 200;
+  height: 60px;
+  background: rgba(8,11,18,0.82);
+  backdrop-filter: blur(24px) saturate(160%);
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center;
+  padding: 0 clamp(16px,4vw,60px);
+  gap: 12px;
+  transition: background 0.4s;
+}
+[data-theme="light"] header {
+  background: rgba(245,247,255,0.88);
+}
 
-  .card-icon { width:38px;height:38px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:19px;margin-bottom:9px; }
-  .card-icon-edu { background: linear-gradient(135deg,rgba(79,110,247,0.2),rgba(124,58,237,0.2)); }
-  .card-icon-ent { background: linear-gradient(135deg,rgba(6,182,212,0.2),rgba(16,185,129,0.2)); }
-  .card-icon-game { background: linear-gradient(135deg,rgba(239,68,68,0.2),rgba(249,115,22,0.2)); }
-  .card-icon-other { background: linear-gradient(135deg,rgba(168,85,247,0.2),rgba(236,72,153,0.2)); }
-  .card-name { font-size:13px;font-weight:700;color:var(--text);margin-bottom:4px;line-height:1.2; }
-  .card-desc { font-size:10px;color:var(--text2);line-height:1.45;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden; }
-  .card-tag { display:inline-block;font-size:9px;font-weight:700;letter-spacing:0.8px;text-transform:uppercase;padding:2px 7px;border-radius:6px;margin-top:8px; }
-  .card-tag-edu { background:rgba(79,110,247,0.12);color:var(--accent); }
-  .card-tag-ent { background:rgba(6,182,212,0.12);color:var(--accent3); }
-  .card-tag-game { background:rgba(239,68,68,0.12);color:#ef4444; }
-  .card-tag-other { background:rgba(168,85,247,0.12);color:#a855f7; }
-  .card-tag-dev { background:rgba(245,158,11,0.15);color:#f59e0b; }
+.logo {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800; font-size: 19px;
+  letter-spacing: -0.8px;
+  color: var(--text);
+  text-decoration: none;
+  display: flex; align-items: center; gap: 8px;
+}
+.logo-dot {
+  width: 8px; height: 8px;
+  background: var(--accent3);
+  border-radius: 50%;
+  display: inline-block;
+  box-shadow: 0 0 10px var(--accent3);
+  animation: pulse 2.5s ease-in-out infinite;
+}
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(0.8)} }
 
-  /* ══════════════════════════
-     APPS PAGE — 3-per-row square tiles
-     ══════════════════════════ */
-  .apps-category-section { padding: 14px 14px 6px; }
-  .apps-category-label {
-    font-size: 10px; font-weight: 700; letter-spacing: 2px;
-    text-transform: uppercase; color: var(--text2);
-    margin-bottom: 8px; padding-left: 4px;
-    display: flex; align-items: center; gap: 8px;
-  }
-  .apps-category-label::before {
-    content: ''; display: inline-block; width: 3px; height: 11px;
-    border-radius: 2px; background: linear-gradient(to bottom, var(--accent), var(--accent2));
-  }
-  /* ══════════════════════════
-     GÖRÜNÜM SEÇİCİ
-     ══════════════════════════ */
-  .view-switcher {
-    display: flex; align-items: center; gap: 6px;
-    padding: 10px 14px 4px; justify-content: flex-end;
-  }
-  .view-btn {
-    background: var(--surface2); border: 1px solid var(--border);
-    border-radius: 8px; padding: 5px 8px; cursor: pointer;
-    color: var(--text2); font-size: 13px; transition: all 0.2s;
-    display: flex; align-items: center; justify-content: center;
-    width: 32px; height: 32px;
-  }
-  .view-btn.active {
-    background: var(--accent); border-color: var(--accent);
-    color: white; box-shadow: 0 0 10px var(--neon1);
-  }
-  .view-btn:hover:not(.active) { border-color: var(--accent); color: var(--accent); }
+.spacer { flex: 1; }
 
-  /* Kart görünümü (varsayılan) */
-  .apps-grid.view-card { display: grid; grid-template-columns: 1fr 1fr; gap: 11px; }
-  @media(min-width:480px){ .apps-grid.view-card { grid-template-columns: repeat(auto-fill,200px); } }
-  .apps-grid.view-card .app-tile {
-    border-radius: 20px; padding: 16px 14px;
-    flex-direction: column; align-items: flex-start; gap: 8px;
-    aspect-ratio: unset;
-  }
-  .apps-grid.view-card .tile-icon { width:38px;height:38px;border-radius:11px;font-size:19px;margin-bottom:2px; }
-  .apps-grid.view-card .tile-name { font-size:12px; }
-  .apps-grid.view-card .tile-desc { display: block; font-size:10px; color:var(--text2); line-height:1.4; display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden; }
+nav { display: flex; align-items: center; gap: 4px; }
+nav a {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 13px; font-weight: 500;
+  color: var(--text2); text-decoration: none;
+  padding: 6px 14px; border-radius: 8px;
+  border: 1px solid transparent;
+  transition: all 0.2s;
+  letter-spacing: 0.02em;
+}
+nav a:hover { color: var(--text); background: var(--surface); border-color: var(--border); }
 
-  /* 3'lü sütun */
-  .apps-grid.view-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 9px; }
-  .apps-grid.view-3 .app-tile {
-    border-radius: 16px; padding: 12px 8px;
-    flex-direction: column; align-items: center; gap: 6px; aspect-ratio: unset;
-  }
-  .apps-grid.view-3 .tile-icon { width:36px;height:36px;border-radius:10px;font-size:18px; }
-  .apps-grid.view-3 .tile-name { font-size:10px; text-align:center; }
-  .apps-grid.view-3 .tile-desc { display: none; }
+.theme-btn {
+  width: 36px; height: 36px;
+  border-radius: 9px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  cursor: pointer; font-size: 18px;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.2s;
+  line-height: 1;
+}
+.theme-btn:hover { border-color: var(--border2); background: var(--surface2); }
 
-  /* 4'lü sütun */
-  .apps-grid.view-4 { display: grid; grid-template-columns: repeat(4,1fr); gap: 7px; }
-  .apps-grid.view-4 .app-tile {
-    border-radius: 14px; padding: 10px 5px;
-    flex-direction: column; align-items: center; gap: 5px; aspect-ratio: unset;
-  }
-  .apps-grid.view-4 .tile-icon { width:30px;height:30px;border-radius:9px;font-size:15px; }
-  .apps-grid.view-4 .tile-name { font-size:9px; text-align:center; }
-  .apps-grid.view-4 .tile-desc { display: none; }
+/* ── COLOR PALETTE PICKER ── */
+.palette-wrap {
+  position: relative;
+}
+.palette-btn {
+  width: 36px; height: 36px;
+  border-radius: 9px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.2s;
+  gap: 2px; padding: 8px;
+}
+.palette-btn:hover { border-color: var(--border2); background: var(--surface2); }
+.palette-btn-dots {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 2.5px; width: 14px; height: 14px;
+}
+.palette-btn-dot { border-radius: 50%; }
 
-  /* Liste görünümü */
-  .apps-grid.view-list { display: flex; flex-direction: column; gap: 8px; }
-  .apps-grid.view-list .app-tile {
-    border-radius: 14px; padding: 10px 14px;
-    flex-direction: row; align-items: center; gap: 12px; aspect-ratio: unset;
-  }
-  .apps-grid.view-list .tile-icon { width:36px;height:36px;border-radius:10px;font-size:18px;flex-shrink:0; }
-  .apps-grid.view-list .tile-name { font-size:13px; text-align:left; flex:1; }
-  .apps-grid.view-list .tile-desc { display: block; font-size:10px; color:var(--text2); margin-top:1px; }
+.palette-panel {
+  position: absolute; top: calc(100% + 8px); right: 0;
+  background: var(--surface);
+  border: 1px solid var(--border2);
+  border-radius: 14px;
+  padding: 12px;
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  opacity: 0; pointer-events: none;
+  transform: translateY(-6px) scale(0.96);
+  transform-origin: top right;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  z-index: 300;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+  width: 172px;
+}
+.palette-panel.open {
+  opacity: 1; pointer-events: all;
+  transform: translateY(0) scale(1);
+}
+.color-swatch {
+  width: 32px; height: 32px;
+  border-radius: 8px;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: transform 0.15s, border-color 0.15s;
+  position: relative;
+}
+.color-swatch:hover { transform: scale(1.12); }
+.color-swatch.active {
+  border-color: var(--text);
+}
+.color-swatch.active::after {
+  content: '✓';
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px; color: #fff;
+  font-weight: 700;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+}
 
-  /* tile-desc genel */
-  .tile-desc { display: none; line-height: 1.35; }
+/* ── HERO ── */
+.hero {
+  position: relative; z-index: 1;
+  padding: clamp(56px,10vw,110px) clamp(16px,4vw,60px) clamp(40px,6vw,72px);
+  text-align: center;
+  max-width: 800px; margin: 0 auto;
+}
 
-  .drag-hint { text-align:center;font-size:10px;color:var(--text2);padding:1px 0 8px;opacity:0.6; }
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: 'DM Mono', monospace;
+  font-size: 11px; font-weight: 500;
+  letter-spacing: 2px; text-transform: uppercase;
+  color: var(--text3);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px; padding: 6px 14px;
+  margin-bottom: 32px;
+}
+.status-dot {
+  width: 6px; height: 6px;
+  background: var(--accent3); border-radius: 50%;
+  animation: pulse 2.5s ease-in-out infinite;
+  box-shadow: 0 0 8px var(--accent3);
+}
 
-  /* tile */
-  .app-tile {
-    background: var(--card-bg); border: 1.5px solid var(--border);
-    border-radius: 20px; padding: 16px 14px;
-    cursor: pointer; text-decoration: none !important; color: var(--text);
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -webkit-tap-highlight-color: transparent;
-    position: relative; overflow: hidden;
-    display: flex; flex-direction: column; align-items: flex-start; gap: 8px;
-    transition: all 0.3s cubic-bezier(0.34,1.56,0.64,1);
-    user-select: none;
-    animation: glowPulse 4s ease-in-out infinite;
-    box-shadow: 0 4px 16px rgba(79,110,247,0.10), 0 2px 6px rgba(0,0,0,0.06);
-  }
-  .app-tile::before {
-    content: ''; position: absolute; inset: -1px; border-radius: 20px; padding: 1px;
-    background: linear-gradient(135deg, var(--accent), var(--accent2), var(--accent3));
-    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor; mask-composite: exclude;
-    opacity: 0; transition: opacity 0.3s;
-  }
-  .app-tile::after {
-    content: ''; position: absolute; inset: 0; border-radius: 20px;
-    box-shadow: 0 0 20px var(--neon1), 0 0 40px var(--neon2);
-    opacity: 0; transition: opacity 0.4s; pointer-events: none;
-  }
-  .app-tile:hover { transform: translateY(-3px) scale(1.02); border-color: transparent; box-shadow: 0 8px 28px rgba(79,110,247,0.22); }
-  .app-tile:hover::before { opacity: 1; }
-  .app-tile:hover::after { opacity: 0.38; }
-  .app-tile.dragging  { opacity: 0.4; transform: scale(0.93); cursor: grabbing; }
-  .app-tile.drag-over { border-color: var(--accent); box-shadow: 0 0 18px var(--neon1); }
+.hero-title {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: clamp(34px,6.5vw,76px);
+  line-height: 1.0;
+  letter-spacing: -3px;
+  margin-bottom: 24px;
+}
 
-  .tile-icon {
-    width: 38px; height: 38px; border-radius: 11px;
-    display: flex; align-items: center; justify-content: center; font-size: 19px;
-    margin-bottom: 2px;
-  }
-  .tile-icon-edu { background: linear-gradient(135deg,rgba(79,110,247,0.2),rgba(124,58,237,0.2)); }
-  .tile-icon-ent { background: linear-gradient(135deg,rgba(6,182,212,0.2),rgba(16,185,129,0.2)); }
-  .tile-icon-game { background: linear-gradient(135deg,rgba(239,68,68,0.2),rgba(249,115,22,0.2)); }
-  .tile-icon-other { background: linear-gradient(135deg,rgba(168,85,247,0.2),rgba(236,72,153,0.2)); }
-  .tile-name { font-size: 12px; font-weight: 700; color: var(--text); line-height: 1.3; text-decoration: none !important; }
-  .app-tile * { text-decoration: none !important; }
-  .tile-badge {
-    position: absolute; top: 7px; right: 7px;
-    background: rgba(245,158,11,0.2); color: #f59e0b;
-    font-size: 7px; font-weight: 700; padding: 2px 5px;
-    border-radius: 5px; letter-spacing: 0.4px;
-  }
+.hero-title .line2 {
+  display: block;
+  background: linear-gradient(100deg, var(--accent) 0%, var(--accent2) 50%, var(--accent3) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
 
-  /* ══════════════════════════
-     ABOUT PAGE
-     ══════════════════════════ */
-  .about-page { padding: 16px 14px 8px; }
-  .about-header {
-    text-align: center; padding: 20px 10px 16px;
-  }
-  .about-logo {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 28px; font-weight: 900;
-    background: linear-gradient(135deg, var(--accent), var(--accent2), var(--accent3));
-    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-    background-clip: text; margin-bottom: 6px;
-  }
-  .about-version {
-    font-size: 11px; color: var(--text2); font-weight: 500; margin-bottom: 14px;
-  }
-  .about-tagline {
-    font-size: 13px; line-height: 1.7; color: var(--text2);
-    background: var(--surface2); border: 1px solid var(--border);
-    border-radius: 16px; padding: 14px 16px; margin-bottom: 16px;
-    text-align: left;
-  }
-  .about-tagline strong { color: var(--accent); font-weight: 700; }
+.hero-sub {
+  font-size: 15px; line-height: 1.8;
+  color: var(--text2); font-weight: 400;
+  max-width: 480px; margin: 0 auto 40px;
+}
 
-  .about-card {
-    background: var(--card-bg); border: 1px solid var(--border);
-    border-radius: 16px; padding: 14px 16px; margin-bottom: 12px;
-  }
-  .about-card-title {
-    font-size: 10px; font-weight: 700; letter-spacing: 1.5px;
-    text-transform: uppercase; color: var(--text2); margin-bottom: 10px;
-    display: flex; align-items: center; gap: 7px;
-  }
-  .about-card-title::before {
-    content: ''; width: 3px; height: 12px; border-radius: 2px;
-    background: linear-gradient(to bottom, var(--accent), var(--accent2)); display: inline-block;
-  }
-  .about-pill-row { display: flex; flex-wrap: wrap; gap: 7px; }
-  .about-pill {
-    display: flex; align-items: center; gap: 5px;
-    font-size: 11px; font-weight: 600; padding: 5px 11px;
-    border-radius: 20px; border: 1px solid var(--border);
-    background: var(--surface2); color: var(--text2);
-  }
-  .about-pill span { font-size: 13px; }
+.hero-stats {
+  display: flex; align-items: center; justify-content: center;
+  flex-wrap: wrap; gap: 8px;
+}
+.stat-chip {
+  display: flex; align-items: center; gap: 7px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 9px 16px;
+  font-family: 'DM Mono', monospace;
+  font-size: 12px; color: var(--text2);
+}
+.stat-chip strong { color: var(--accent); font-family: 'Syne', sans-serif; font-size: 15px; font-weight: 700; }
 
-  .about-license {
-    background: linear-gradient(135deg, rgba(79,110,247,0.07), rgba(124,58,237,0.07));
-    border: 1px solid rgba(79,110,247,0.2);
-    border-radius: 14px; padding: 14px 16px; margin-bottom: 12px;
-    font-size: 12px; line-height: 1.7; color: var(--text2);
-  }
-  .about-license strong { color: var(--text); }
-  .about-license a { color: var(--accent); text-decoration: none; font-weight: 600; }
+/* ── FILTER BAR ── */
+.section-header {
+  position: relative; z-index: 1;
+  padding: 0 clamp(16px,4vw,60px) 24px;
+  display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+}
 
-  .about-contact {
-    display: flex; gap: 10px; margin-bottom: 16px;
-  }
-  .about-contact a {
-    flex: 1; display: flex; align-items: center; justify-content: center; gap: 8px;
-    padding: 11px 10px; border-radius: 13px;
-    border: 1px solid var(--border); background: var(--surface2);
-    color: var(--text2); text-decoration: none;
-    font-size: 11px; font-weight: 600;
-    transition: all 0.25s;
-  }
-  .about-contact a:hover { border-color: var(--accent); color: var(--accent); box-shadow: 0 0 12px var(--neon1); }
-  .about-contact svg { width: 14px; height: 14px; flex-shrink: 0; }
+.filter-btn {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 12px; font-weight: 600;
+  letter-spacing: 0.02em;
+  padding: 7px 16px; border-radius: 7px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text2); cursor: pointer;
+  transition: all 0.2s;
+}
+.filter-btn:hover { color: var(--text); border-color: var(--border2); }
+.filter-btn.active { background: var(--text); color: var(--bg); border-color: var(--text); }
+.filter-btn.f-edu.active   { background: var(--accent2); color: #fff; border-color: var(--accent2); box-shadow: 0 4px 16px var(--glow2); }
+.filter-btn.f-ent.active   { background: var(--accent3); color: #0d1120; border-color: var(--accent3); }
+.filter-btn.f-game.active  { background: var(--red); color: #fff; border-color: var(--red); }
+.filter-btn.f-other.active { background: var(--amber); color: #0d1120; border-color: var(--amber); }
 
-  /* ══════════════════════════
-     DETAIL MODAL
-     ══════════════════════════ */
-  .modal-overlay {
-    position: fixed; inset: 0;
-    background: rgba(0,0,0,0.6); backdrop-filter: blur(8px);
-    z-index: 200; display: flex; align-items: flex-end; justify-content: center;
-    opacity: 0; pointer-events: none; transition: opacity 0.3s;
-  }
-  .modal-overlay.open { opacity: 1; pointer-events: all; }
-  .modal-sheet {
-    width: 100%; max-width: 480px;
-    background: var(--surface); border-radius: 24px 24px 0 0;
-    padding: 22px 18px 36px;
-    transform: translateY(100%);
-    transition: transform 0.4s cubic-bezier(0.34,1.56,0.64,1);
-    max-height: 85vh; overflow-y: auto; position: relative;
-  }
-  .modal-overlay.open .modal-sheet { transform: translateY(0); }
-  .modal-handle { width:38px;height:4px;background:var(--border);border-radius:2px;margin:0 auto 18px; }
-  .modal-icon { width:60px;height:60px;border-radius:18px;display:flex;align-items:center;justify-content:center;font-size:30px;margin-bottom:12px; }
-  .modal-title { font-size:21px;font-weight:900;color:var(--text);margin-bottom:5px; }
-  .modal-subtitle { font-size:12.5px;color:var(--text2);margin-bottom:14px;line-height:1.65; }
-  .modal-warning {
-    background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.3);
-    border-radius:12px;padding:11px 13px;font-size:12px;color:#f59e0b;
-    margin-bottom:14px;line-height:1.5;display:flex;gap:8px;align-items:flex-start;
-  }
-  .modal-actions { display:flex; }
-  .btn-primary {
-    display:flex;align-items:center;justify-content:center;gap:8px;
-    padding:14px 20px;border-radius:14px;width:100%;
-    font-family:'Exo 2',sans-serif;font-size:14px;font-weight:700;
-    cursor:pointer;border:none;text-decoration:none;
-    background:linear-gradient(135deg,var(--accent),var(--accent2));
-    color:white;box-shadow:0 4px 20px var(--neon1);transition:all 0.25s;
-  }
-  .btn-primary:hover { transform:translateY(-2px);box-shadow:0 8px 30px var(--neon1); }
-  .modal-close {
-    position:absolute;top:18px;right:18px;
-    background:var(--surface2);border:1px solid var(--border);
-    border-radius:50%;width:30px;height:30px;
-    display:flex;align-items:center;justify-content:center;
-    cursor:pointer;font-size:15px;color:var(--text2);transition:all 0.2s;
-  }
-  .modal-close:hover { color:var(--text);border-color:var(--accent); }
+/* ── CATEGORY SECTIONS ── */
+.cat-block {
+  position: relative; z-index: 1;
+  padding: 0 clamp(16px,4vw,60px) 48px;
+}
+.cat-block.hidden { display: none; }
 
-  /* ══════════════════════════
-     BOTTOM BAR
-     ══════════════════════════ */
-  .bottom-bar {
-    position: fixed; bottom: 0; left: 0; right: 0;
-    height: 60px;
-    background: var(--bg);
-    border-top: 1px solid var(--bar-border);
-    display: flex; align-items: center; justify-content: space-around;
-    z-index: 100;
-    box-shadow: 0 -2px 20px rgba(79,110,247,0.08);
-    padding: 0 4px 4px;
-    transition: background 0.4s;
-  }
-  .bar-btn {
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
-    gap: 2px; cursor: pointer; padding: 6px 12px; border-radius: 14px;
-    border: none; background: transparent; color: var(--text2);
-    transition: all 0.25s; flex: 1;
-    font-family: 'Exo 2', sans-serif;
-  }
-  .bar-btn svg { width: 20px; height: 20px; }
-  .bar-btn span { font-size: 9px; font-weight: 600; letter-spacing: 0.3px; }
-  .bar-btn.active { color: var(--accent); background: rgba(79,110,247,0.1); }
-  .bar-btn:hover  { color: var(--accent); }
-  .bar-divider { width:1px; height:26px; background:var(--border); flex-shrink:0; }
+.cat-header {
+  display: flex; align-items: center; gap: 14px;
+  margin-bottom: 20px;
+}
+.cat-title {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px; font-weight: 500;
+  letter-spacing: 2px; text-transform: uppercase;
+  color: var(--text3);
+  white-space: nowrap;
+}
+.cat-rule { flex: 1; height: 1px; background: var(--border); }
+.cat-count {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px; color: var(--text3);
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 4px; padding: 3px 9px;
+}
 
-  /* contact mini */
-  .bar-contact {
-    display: flex; flex-direction: column; align-items: center; gap: 3px; padding: 0 10px;
-  }
-  .bar-contact-label {
-    font-size: 8px; font-weight: 700; letter-spacing: 1.4px;
-    text-transform: uppercase; color: var(--text2);
-  }
-  .bar-contact-icons { display: flex; align-items: center; gap: 14px; }
-  .bar-contact-icons a { color: var(--text2); display: flex; align-items: center; transition: color 0.2s; }
-  .bar-contact-icons a:hover { color: var(--accent); }
-  .bar-contact-icons svg { width: 17px; height: 17px; }
+/* ── CARD GRID ── */
+.apps-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 12px;
+}
 
-  /* ══════════════════════════
-     WHAT'S NEW MODAL
-     ══════════════════════════ */
-  /* ── WHAT'S NEW: full-screen scroll page ── */
-  .news-overlay {
-    position: fixed;
-    top: 0; left: 0; right: 0; bottom: 0;
-    /* use dvh so iOS Safari bottom bar is included */
-    height: 100dvh;
-    background: var(--bg);
-    z-index: 300;
-    overflow-y: scroll;
-    -webkit-overflow-scrolling: touch;
-    overscroll-behavior: contain;
-    opacity: 0; pointer-events: none;
-    transition: opacity 0.35s ease;
-  }
-  .news-overlay.open { opacity:1; pointer-events:all; }
-  .news-hero {
-    background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
-    padding: 14px 18px 12px;
-    position: sticky; top: 0; z-index: 10;
-  }
-  .news-hero-title { font-size: 20px; font-weight: 900; color: white; margin-bottom: 2px; }
-  .news-hero-sub   { font-size: 11px; color: rgba(255,255,255,0.75); font-weight: 500; }
-  .news-content { padding: 8px 0 0; }
-  .news-item {
-    display: flex; gap: 14px;
-    padding: 16px 20px;
-    border-bottom: 1px solid var(--border);
-  }
-  .news-item:last-child { border-bottom: none; }
-  .news-item-dot {
-    width: 8px; height: 8px; border-radius: 50%;
-    background: linear-gradient(135deg, var(--accent), var(--accent2));
-    flex-shrink: 0; margin-top: 7px;
-    box-shadow: 0 0 8px var(--neon1);
-  }
-  .news-item-text { font-size: 14px; color: var(--text); line-height: 1.6; }
-  .news-item-tag {
-    display: inline-block; background: rgba(79,110,247,0.12); color: var(--accent);
-    font-size: 9px; font-weight: 700; letter-spacing: 0.8px; text-transform: uppercase;
-    padding: 2px 7px; border-radius: 5px; margin-left: 6px; vertical-align: middle;
-  }
-  .news-item-tag.beta { background: rgba(245,158,11,0.15); color: #f59e0b; }
-  .news-action-bar {
-    padding: 20px 20px 40px;
-    display: flex; flex-direction: column; gap: 12px;
-    border-top: 1px solid var(--border);
-    margin-top: 8px;
-  }
-  .news-checkbox { display:flex; align-items:center; gap:10px; cursor:pointer; }
-  .news-check-box {
-    width: 18px; height: 18px; border-radius: 5px;
-    border: 1.5px solid var(--accent);
-    display: flex; align-items: center; justify-content: center;
-    transition: all 0.2s; flex-shrink: 0;
-  }
-  .news-check-box.checked { background: var(--accent); }
-  .news-check-box.checked::after { content:'\2713'; color:white; font-size:12px; font-weight:700; }
-  .news-checkbox-label { font-size: 12px; color: var(--text2); line-height: 1.4; }
+.app-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px 18px 16px;
+  cursor: pointer;
+  display: flex; flex-direction: column; gap: 10px;
+  transition: transform 0.3s cubic-bezier(0.34,1.4,0.64,1), border-color 0.2s, box-shadow 0.2s, background 0.2s, opacity 0.5s ease, translate 0.5s ease;
+  box-shadow: var(--shadow);
+  position: relative; overflow: hidden;
+}
 
-  ::-webkit-scrollbar { width:4px; }
-  ::-webkit-scrollbar-track { background:transparent; }
-  ::-webkit-scrollbar-thumb { background:var(--border);border-radius:2px; }
+.app-card::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, var(--glow1), transparent 60%);
+  opacity: 0; transition: opacity 0.3s;
+  border-radius: inherit;
+  pointer-events: none;
+}
+.app-card:hover::before { opacity: 1; }
+.app-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--border2);
+  background: var(--card-hover);
+  box-shadow: 0 16px 48px rgba(0,0,0,0.4);
+}
 
-  /* ══════════════════════════
-     GİRİŞ EKRANI
-     ══════════════════════════ */
-  #loginOverlay {
-    position: fixed; inset: 0; z-index: 9999;
-    background: var(--bg);
-    display: flex; flex-direction: column;
-    align-items: center; justify-content: center;
-    padding: 32px 24px;
-  }
-  #loginOverlay.hidden { display: none; }
-  .login-logo {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 26px; font-weight: 900;
-    background: linear-gradient(135deg, var(--accent), var(--accent2), var(--accent3));
-    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-    background-clip: text; margin-bottom: 6px; text-align: center;
-  }
-  .login-sub {
-    font-size: 12px; color: var(--text2); margin-bottom: 36px; text-align: center;
-  }
-  .login-field {
-    width: 100%; max-width: 320px;
-    background: var(--surface2); border: 1px solid var(--border);
-    border-radius: 14px; padding: 14px 16px;
-    font-family: 'Exo 2', sans-serif; font-size: 15px; font-weight: 600;
-    color: var(--text); outline: none; margin-bottom: 12px;
-    transition: border-color 0.25s, box-shadow 0.25s;
-    display: block;
-  }
-  .login-field:focus {
-    border-color: var(--accent);
-    box-shadow: 0 0 0 3px rgba(79,110,247,0.15);
-  }
-  .login-field::placeholder { color: var(--text2); font-weight: 400; }
-  .login-btn {
-    width: 100%; max-width: 320px;
-    padding: 14px; border-radius: 14px; border: none;
-    background: linear-gradient(135deg, var(--accent), var(--accent2));
-    color: white; font-family: 'Exo 2', sans-serif;
-    font-size: 15px; font-weight: 700; cursor: pointer;
-    margin-top: 4px; margin-bottom: 16px;
-    box-shadow: 0 4px 20px rgba(79,110,247,0.3);
-    transition: all 0.25s;
-  }
-  .login-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(79,110,247,0.4); }
-  .login-error {
-    font-size: 12px; color: #ef4444; font-weight: 600;
-    min-height: 18px; text-align: center;
-  }
+/* scroll animations handled by JS */
+
+.card-top { display: flex; justify-content: space-between; align-items: flex-start; }
+
+.card-icon {
+  width: 44px; height: 44px; border-radius: 11px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px;
+}
+.card-icon svg { width: 22px; height: 22px; }
+.icon-edu svg   { color: var(--accent); }
+.icon-ent svg   { color: var(--accent3); }
+.icon-game svg  { color: var(--red); }
+.icon-other svg { color: var(--amber); }
+
+.info-icon svg { width: 18px; height: 18px; color: var(--text2); }
+.icon-edu   { background: linear-gradient(135deg,rgba(91,142,255,.2),rgba(157,110,255,.15)); }
+.icon-ent   { background: linear-gradient(135deg,rgba(0,229,160,.2),rgba(0,181,125,.1)); }
+.icon-game  { background: linear-gradient(135deg,rgba(255,107,107,.2),rgba(255,140,80,.1)); }
+.icon-other { background: linear-gradient(135deg,rgba(255,184,63,.2),rgba(255,140,40,.1)); }
+
+.badge {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px; font-weight: 500;
+  letter-spacing: 1.2px; text-transform: uppercase;
+  padding: 4px 9px; border-radius: 5px;
+}
+.b-edu   { background: rgba(91,142,255,.12); color: var(--accent); border: 1px solid rgba(91,142,255,.2); }
+.b-ent   { background: rgba(0,229,160,.12);  color: var(--accent3); border: 1px solid rgba(0,229,160,.2); }
+.b-game  { background: rgba(255,107,107,.12);color: var(--red); border: 1px solid rgba(255,107,107,.2); }
+.b-other { background: rgba(255,184,63,.12); color: var(--amber); border: 1px solid rgba(255,184,63,.2); }
+.b-beta  { background: rgba(255,184,63,.12); color: var(--amber); border: 1px solid rgba(255,184,63,.2); }
+
+.card-name {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700; font-size: 16px;
+  letter-spacing: -0.3px; line-height: 1.2;
+}
+.card-short {
+  font-size: 13px; color: var(--text2);
+  line-height: 1.6; font-weight: 400; flex: 1;
+}
+
+.card-foot {
+  display: flex; align-items: center; justify-content: space-between;
+  padding-top: 12px; border-top: 1px solid var(--border); margin-top: 2px;
+}
+.card-cta {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px; font-weight: 500;
+  letter-spacing: 0.5px;
+  color: var(--text3); transition: color 0.2s;
+}
+.app-card:hover .card-cta { color: var(--accent); }
+
+.card-arrow {
+  width: 26px; height: 26px;
+  background: var(--surface2); border-radius: 7px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; color: var(--text3);
+  transition: all 0.2s;
+}
+.app-card:hover .card-arrow {
+  background: var(--accent); color: #fff;
+  transform: rotate(-45deg) scale(1.1);
+}
+
+/* ── ABOUT ── */
+.about-section {
+  position: relative; z-index: 1;
+  margin: 0 clamp(16px,4vw,60px) 48px;
+}
+.about-inner {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: clamp(28px,4vw,52px);
+  display: grid; grid-template-columns: 1fr 1fr; gap: 52px;
+}
+@media(max-width:640px){ .about-inner { grid-template-columns:1fr; gap:28px; } }
+
+.about-tag {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px; letter-spacing: 2px;
+  text-transform: uppercase; color: var(--text3);
+  margin-bottom: 12px;
+}
+.about-heading {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800; font-size: clamp(22px,3vw,30px);
+  letter-spacing: -1px; line-height: 1.2;
+  margin-bottom: 16px;
+}
+.about-body {
+  font-size: 14px; line-height: 1.9;
+  color: var(--text2); font-weight: 400;
+}
+.about-body strong { color: var(--text); font-weight: 600; }
+
+.info-list { display: flex; flex-direction: column; }
+.info-item {
+  display: flex; align-items: center; gap: 14px;
+  padding: 14px 0; border-bottom: 1px solid var(--border);
+}
+.info-item:last-child { border-bottom: none; padding-bottom: 0; }
+.info-icon {
+  width: 36px; height: 36px; border-radius: 9px;
+  background: var(--surface2); border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px; flex-shrink: 0;
+}
+.info-lbl {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px; letter-spacing: 1.5px;
+  text-transform: uppercase; color: var(--text3);
+  margin-bottom: 3px;
+}
+.info-val { font-size: 13px; font-weight: 500; }
+.info-val a { color: var(--accent); text-decoration: none; }
+.info-val a:hover { text-decoration: underline; }
+
+/* ── FOOTER ── */
+footer {
+  position: relative; z-index: 1;
+  border-top: 1px solid var(--border);
+  padding: 20px clamp(16px,4vw,60px);
+  display: flex; align-items: center;
+  justify-content: space-between; flex-wrap: wrap; gap: 12px;
+}
+.footer-copy {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px; color: var(--text3);
+  letter-spacing: 0.3px;
+}
+.footer-links { display: flex; gap: 20px; }
+.footer-links a {
+  font-size: 12px; color: var(--text3); font-weight: 500;
+  text-decoration: none; transition: color 0.2s;
+}
+.footer-links a:hover { color: var(--accent); }
+
+/* ── MODAL ── */
+.modal-bg {
+  position: fixed; inset: 0; z-index: 500;
+  background: rgba(0,0,0,0.7);
+  backdrop-filter: blur(12px);
+  display: flex; align-items: flex-end; justify-content: center;
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.3s;
+}
+.modal-bg.open { opacity: 1; pointer-events: all; }
+.modal-bg.open .modal-sheet { transform: translateY(0); }
+
+.modal-sheet {
+  width: 100%; max-width: 500px;
+  background: var(--bg2);
+  border-radius: 24px 24px 0 0;
+  border: 1px solid var(--border);
+  border-bottom: none;
+  padding: 8px 28px 48px;
+  transform: translateY(80px);
+  transition: transform 0.4s cubic-bezier(0.34,1.4,0.64,1);
+  position: relative;
+}
+.modal-handle {
+  width: 36px; height: 3px;
+  background: var(--border2); border-radius: 2px;
+  margin: 14px auto 28px;
+}
+.modal-close {
+  position: absolute; top: 18px; right: 22px;
+  width: 30px; height: 30px; border-radius: 7px;
+  border: 1px solid var(--border); background: var(--surface);
+  cursor: pointer; font-size: 12px; color: var(--text2);
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.2s;
+}
+.modal-close:hover { color: var(--red); border-color: var(--red); }
+
+.m-ico  { font-size: 48px; line-height: 1; margin-bottom: 16px; }
+.m-name {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800; font-size: 24px;
+  letter-spacing: -0.8px; margin-bottom: 10px;
+}
+.m-desc { font-size: 14px; line-height: 1.8; color: var(--text2); margin-bottom: 20px; }
+.m-warn {
+  background: rgba(255,184,63,.08);
+  border: 1px solid rgba(255,184,63,.2);
+  border-radius: 10px; padding: 12px 14px;
+  font-size: 12px; color: var(--amber);
+  margin-bottom: 18px; line-height: 1.6;
+  font-family: 'DM Mono', monospace;
+}
+.m-btn {
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  width: 100%; padding: 15px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
+  color: #fff;
+  font-family: 'Syne', sans-serif;
+  font-weight: 700; font-size: 14px; letter-spacing: -0.2px;
+  text-decoration: none; border: none; cursor: pointer;
+  transition: all 0.25s;
+  box-shadow: 0 8px 28px var(--glow1);
+}
+.m-btn:hover { transform: translateY(-2px); box-shadow: 0 14px 36px var(--glow1); }
+
+/* ── RESPONSIVE ── */
+@media(max-width:540px){
+  nav { display: none; }
+  .apps-grid { grid-template-columns: 1fr 1fr; gap: 9px; }
+  .app-card { padding: 14px 12px 12px; }
+  .card-name { font-size: 13px; }
+  .card-icon { width: 36px; height: 36px; font-size: 16px; }
+  .card-short { display: none; }
+}
+
+/* ── SCROLL ANIMATIONS ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.6s cubic-bezier(0.22,1,0.36,1), transform 0.6s cubic-bezier(0.22,1,0.36,1);
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Hero elements stagger */
+.hero-eyebrow { opacity: 0; transform: translateY(16px); transition: opacity 0.5s ease 0.05s, transform 0.5s ease 0.05s; }
+.hero-title   { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease 0.15s, transform 0.6s ease 0.15s; }
+.hero-sub     { opacity: 0; transform: translateY(16px); transition: opacity 0.5s ease 0.28s, transform 0.5s ease 0.28s; }
+.hero-stats   { opacity: 0; transform: translateY(12px); transition: opacity 0.5s ease 0.38s, transform 0.5s ease 0.38s; }
+.hero-loaded .hero-eyebrow,
+.hero-loaded .hero-title,
+.hero-loaded .hero-sub,
+.hero-loaded .hero-stats { opacity: 1; transform: translateY(0); }
+
+/* Card stagger via CSS var */
+.app-card {
+  opacity: 0;
+  transform: translateY(22px);
+}
+.app-card.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Cat header slide-in from left */
+.cat-header {
+  opacity: 0;
+  transform: translateX(-16px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.cat-header.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Filter bar */
+.section-header {
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.5s ease 0.1s, transform 0.5s ease 0.1s;
+}
+.section-header.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* About */
+.about-inner {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.about-inner.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
 </style>
 </head>
 <body>
 
-<!-- GİRİŞ EKRANI -->
-<div id="loginOverlay">
-  <div class="login-logo">sebasmobil</div>
-  <div class="login-sub">Devam etmek için giriş yapın</div>
-  <input class="login-field" id="loginUser" type="text" placeholder="Kullanıcı adı" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
-  <input class="login-field" id="loginPass" type="password" placeholder="Şifre" autocomplete="off">
-  <button class="login-btn" onclick="loginKontrol()">Giriş Yap</button>
-  <div class="login-error" id="loginError"></div>
+<div class="glow-blob glow1"></div>
+<div class="glow-blob glow2"></div>
+
+<!-- HEADER -->
+<header>
+  <a href="#" class="logo">
+    <span class="logo-dot"></span>sebasmobil
+  </a>
+  <div class="spacer"></div>
+  <nav>
+    <a href="#apps">Uygulamalar</a>
+    <a href="#hakkinda">Hakkında</a>
+  </nav>
+  <button class="theme-btn" id="themeBtn" onclick="toggleTheme()" title="Tema değiştir"></button>
+  <div class="palette-wrap">
+    <button class="palette-btn" id="paletteBtn" onclick="togglePalette()" title="Renk teması">
+      <div class="palette-btn-dots" id="paletteDots"></div>
+    </button>
+    <div class="palette-panel" id="palettePanel"></div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-eyebrow"><span class="status-dot"></span>Ücretsiz · Reklamsız · Açık Kaynak</div>
+  <h1 class="hero-title">
+    Sade, güçlü
+    <span class="line2">web uygulamaları.</span>
+  </h1>
+  <p class="hero-sub">
+    Ücretsiz, reklamsız, çevrimdışı çalışır.
+  </p>
+  <div class="hero-stats">
+    <div class="stat-chip"><strong>15+</strong> Uygulama</div>
+    <div class="stat-chip"><strong>0₺</strong> Ücretsiz</div>
+    <div class="stat-chip"><strong>∞</strong> Süresiz</div>
+    <div class="stat-chip">🔓 GNU AGPL v3.0</div>
+  </div>
+</section>
+
+<!-- FILTERS -->
+<div class="section-header" id="apps">
+  <button class="filter-btn active"  onclick="fc('all',this)">Tümü</button>
+  <button class="filter-btn f-edu"   onclick="fc('edu',this)">📚 Eğitim</button>
+  <button class="filter-btn f-ent"   onclick="fc('ent',this)">🎵 Eğlence</button>
+  <button class="filter-btn f-game"  onclick="fc('game',this)">🕹️ Oyunlar</button>
+  <button class="filter-btn f-other" onclick="fc('other',this)">🔧 Diğer</button>
 </div>
 
-<!-- TOP BAR: logo | spacer | greeting | theme -->
-<div class="top-bar">
-  <div class="top-bar-logo">sebasmobil <span>v1.0.01</span></div>
-  <div class="top-bar-spacer"></div>
-  <div class="top-bar-greeting" id="greetingText">günaydın! ☀️</div>
-  <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()">🌙</button>
-  <button class="logout-btn" onclick="cikisYap()" title="Çıkış Yap">
-    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/>
-    </svg>
-    Çıkış
-  </button>
+<!-- EDU -->
+<div class="cat-block" id="sec-edu">
+  <div class="cat-header">
+    <span class="cat-title" style="color:var(--accent2)">Eğitim</span>
+    <div class="cat-rule"></div>
+    <span class="cat-count">5 uygulama</span>
+  </div>
+  <div class="apps-grid">
+    <div class="app-card" onclick="openModal('sogretmen')">
+      <div class="card-top"><div class="card-icon icon-edu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div><span class="badge b-edu">Eğitim</span></div>
+      <div class="card-name">S-Öğretmen</div>
+      <div class="card-short">Sosyal kulüp, rehberlik, ders programı ve not çizelgesi yönetimi</div>
+      <div class="card-foot"><span class="card-cta">Uygulamayı Aç</span><div class="card-arrow">↗</div></div>
+    </div>
+    <div class="app-card" onclick="openModal('ssinav')">
+      <div class="card-top"><div class="card-icon icon-edu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg></div><span class="badge b-edu">Eğitim</span></div>
+      <div class="card-name">S-Sınav</div>
+      <div class="card-short">Fotoğraflarla yazılı sınav kağıdı hazırlama aracı</div>
+      <div class="card-foot"><span class="card-cta">Uygulamayı Aç</span><div class="card-arrow">↗</div></div>
+    </div>
+    <div class="app-card" onclick="openModal('splanolus')">
+      <div class="card-top"><div class="card-icon icon-edu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/><path d="M7 6h.01M12 6h.01"/></svg></div><span class="badge b-edu">Eğitim</span></div>
+      <div class="card-name">S-Plan Oluştur</div>
+      <div class="card-short">Excel planını S-Öğretmen formatına dönüştür</div>
+      <div class="card-foot"><span class="card-cta">Uygulamayı Aç</span><div class="card-arrow">↗</div></div>
+    </div>
+    <div class="app-card" onclick="openModal('skatilim')">
+      <div class="card-top"><div class="card-icon icon-edu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/><line x1="12" y1="2" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="22"/><line x1="2" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="22" y2="12"/></svg></div><span class="badge b-edu">Eğitim</span></div>
+      <div class="card-name">S-Katılım</div>
+      <div class="card-short">Sınıfta rastgele öğrenci seçici aracı</div>
+      <div class="card-foot"><span class="card-cta">Uygulamayı Aç</span><div class="card-arrow">↗</div></div>
+    </div>
+    <div class="app-card" onclick="openModal('sdagitim')">
+      <div class="card-top"><div class="card-icon icon-edu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/></svg></div><span class="badge b-beta">Beta</span></div>
+      <div class="card-name">S-Dağıtım</div>
+      <div class="card-short">Öğretmen &amp; sınıf ders programı oluşturucu</div>
+      <div class="card-foot"><span class="card-cta">Uygulamayı Aç</span><div class="card-arrow">↗</div></div>
+    </div>
+  </div>
 </div>
 
-<!-- MAIN -->
-<main>
-  <!-- HOME -->
-  <div class="page active" id="page-home">
-    <div class="category-section">
-      <div class="category-title">🎓 Eğitim</div>
-      <div class="cards-grid" id="home-edu-grid"></div>
+<!-- ENT -->
+<div class="cat-block" id="sec-ent">
+  <div class="cat-header">
+    <span class="cat-title" style="color:var(--accent3)">Eğlence</span>
+    <div class="cat-rule"></div>
+    <span class="cat-count">2 uygulama</span>
+  </div>
+  <div class="apps-grid">
+    <div class="app-card" onclick="openModal('smuzik')">
+      <div class="card-top"><div class="card-icon icon-ent"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></div><span class="badge b-ent">Eğlence</span></div>
+      <div class="card-name">S-Müzik</div>
+      <div class="card-short">Müzik keşfet, çalma listeleri oluştur ve eğlen</div>
+      <div class="card-foot"><span class="card-cta">Uygulamayı Aç</span><div class="card-arrow">↗</div></div>
     </div>
-    <div class="category-section">
-      <div class="category-title">🎵 Eğlence</div>
-      <div class="cards-grid" id="home-ent-grid"></div>
-    </div>
-    <div class="category-section">
-      <div class="category-title">🕹️ Oyunlar</div>
-      <div class="cards-grid" id="home-game-grid"></div>
-    </div>
-    <div class="category-section">
-      <div class="category-title">🔧 Diğer</div>
-      <div class="cards-grid" id="home-other-grid"></div>
+    <div class="app-card" onclick="openModal('sokey101')">
+      <div class="card-top"><div class="card-icon icon-ent"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="18" rx="2"/><line x1="12" y1="3" x2="12" y2="21"/><path d="M7 8h2m-2 4h4m-4 4h2"/><path d="M17 8h-2m2 4h-4m4 4h-2"/></svg></div><span class="badge b-ent">Eğlence</span></div>
+      <div class="card-name">S-Okey101</div>
+      <div class="card-short">Okey ve 101 için pratik çetele tutma aracı</div>
+      <div class="card-foot"><span class="card-cta">Uygulamayı Aç</span><div class="card-arrow">↗</div></div>
     </div>
   </div>
+</div>
 
-  <!-- APPS -->
-  <div class="page" id="page-apps">
-    <!-- Görünüm Seçici -->
-    <div class="view-switcher">
-      <button class="view-btn" id="vbtn-card" onclick="setView('card')" title="Kart">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="3" width="8" height="10" rx="2"/><rect x="13" y="3" width="8" height="10" rx="2"/><rect x="3" y="15" width="8" height="6" rx="2"/><rect x="13" y="15" width="8" height="6" rx="2"/></svg>
-      </button>
-      <button class="view-btn" id="vbtn-3" onclick="setView('3')" title="3'lü">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="2" y="3" width="6" height="18" rx="2"/><rect x="9" y="3" width="6" height="18" rx="2"/><rect x="16" y="3" width="6" height="18" rx="2"/></svg>
-      </button>
-      <button class="view-btn" id="vbtn-4" onclick="setView('4')" title="4'lü">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="4" height="9" rx="1"/><rect x="7" y="2" width="4" height="9" rx="1"/><rect x="12" y="2" width="4" height="9" rx="1"/><rect x="17" y="2" width="5" height="9" rx="1"/><rect x="2" y="13" width="4" height="9" rx="1"/><rect x="7" y="13" width="4" height="9" rx="1"/><rect x="12" y="13" width="4" height="9" rx="1"/><rect x="17" y="13" width="5" height="9" rx="1"/></svg>
-      </button>
-      <button class="view-btn" id="vbtn-list" onclick="setView('list')" title="Liste">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><circle cx="3" cy="6" r="1.5" fill="currentColor"/><circle cx="3" cy="12" r="1.5" fill="currentColor"/><circle cx="3" cy="18" r="1.5" fill="currentColor"/></svg>
-      </button>
+<!-- GAME -->
+<div class="cat-block" id="sec-game">
+  <div class="cat-header">
+    <span class="cat-title" style="color:var(--red)">Oyunlar</span>
+    <div class="cat-rule"></div>
+    <span class="cat-count">7 uygulama</span>
+  </div>
+  <div class="apps-grid">
+    <div class="app-card" onclick="openModal('sudoku')">
+      <div class="card-top"><div class="card-icon icon-game"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="1"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/><line x1="9" y1="3" x2="9" y2="21"/><line x1="15" y1="3" x2="15" y2="21"/></svg></div><span class="badge b-game">Oyun</span></div>
+      <div class="card-name">Sudoku</div>
+      <div class="card-short">Farklı zorluk seviyelerinde klasik Sudoku bulmacası</div>
+      <div class="card-foot"><span class="card-cta">Uygulamayı Aç</span><div class="card-arrow">↗</div></div>
     </div>
-    <div class="apps-category-section">
-      <div class="apps-category-label">🎓 Eğitim</div>
-      <div class="drag-hint">✥ Sürükleyerek sıralayabilirsiniz</div>
-      <div class="apps-grid" id="apps-edu-grid"></div>
+    <div class="app-card" onclick="openModal('satranc')">
+      <div class="card-top"><div class="card-icon icon-game"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 16l-1.5 3h11L16 16"/><rect x="7" y="13" width="10" height="3" rx="1"/><path d="M12 3a2 2 0 0 0-2 2c0 .8.4 1.5 1 1.9V9h-2v2h6V9h-2V6.9c.6-.4 1-1.1 1-1.9a2 2 0 0 0-2-2z"/></svg></div><span class="badge b-game">Oyun</span></div>
+      <div class="card-name">Satranç</div>
+      <div class="card-short">Strateji tahtası: mobilde satranç keyfi</div>
+      <div class="card-foot"><span class="card-cta">Uygulamayı Aç</span><div class="card-arrow">↗</div></div>
     </div>
-    <div class="apps-category-section">
-      <div class="apps-category-label">🎵 Eğlence</div>
-      <div class="apps-grid" id="apps-ent-grid"></div>
+    <div class="app-card" onclick="openModal('matematik')">
+      <div class="card-top"><div class="card-icon icon-game"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/><line x1="5" y1="7" x2="9" y2="7"/><line x1="15" y1="17" x2="19" y2="17"/><line x1="5" y1="17" x2="9" y2="17"/><line x1="15" y1="7" x2="19" y2="7"/></svg></div><span class="badge b-game">Oyun</span></div>
+      <div class="card-name">Matematik</div>
+      <div class="card-short">Eğlenceli dört işlem oyunu, her yaş için</div>
+      <div class="card-foot"><span class="card-cta">Uygulamayı Aç</span><div class="card-arrow">↗</div></div>
     </div>
-    <div class="apps-category-section">
-      <div class="apps-category-label">🕹️ Oyunlar</div>
-      <div class="apps-grid" id="apps-game-grid"></div>
+    <div class="app-card" onclick="openModal('yilan')">
+      <div class="card-top"><div class="card-icon icon-game"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12c0-3 2-5 5-5h8c2 0 3 1.5 3 3s-1 3-3 3H8c-3 0-5 2-5 4s2 4 5 4h1"/><circle cx="20" cy="18" r="2"/><circle cx="5" cy="7" r="1" fill="currentColor" stroke="none"/></svg></div><span class="badge b-game">Oyun</span></div>
+      <div class="card-name">Yılan</div>
+      <div class="card-short">Efsanevi yılan oyununun modern versiyonu</div>
+      <div class="card-foot"><span class="card-cta">Uygulamayı Aç</span><div class="card-arrow">↗</div></div>
     </div>
-    <div class="apps-category-section">
-      <div class="apps-category-label">🔧 Diğer</div>
-      <div class="apps-grid" id="apps-other-grid"></div>
+    <div class="app-card" onclick="openModal('hafiza')">
+      <div class="card-top"><div class="card-icon icon-game"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="9" height="12" rx="2"/><rect x="13" y="4" width="9" height="12" rx="2"/><path d="M6 20h12"/><path d="M12 16v4"/></svg></div><span class="badge b-game">Oyun</span></div>
+      <div class="card-name">Hafıza Kartı</div>
+      <div class="card-short">Eşleştirme tabanlı klasik hafıza kart oyunu</div>
+      <div class="card-foot"><span class="card-cta">Uygulamayı Aç</span><div class="card-arrow">↗</div></div>
+    </div>
+    <div class="app-card" onclick="openModal('kelimeavcisi')">
+      <div class="card-top"><div class="card-icon icon-game"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 7 4 4 20 4 20 7"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/></svg></div><span class="badge b-game">Oyun</span></div>
+      <div class="card-name">Kelime Avcısı</div>
+      <div class="card-short">Harfleri birleştir, gizli kelimeleri bul</div>
+      <div class="card-foot"><span class="card-cta">Uygulamayı Aç</span><div class="card-arrow">↗</div></div>
+    </div>
+    <div class="app-card" onclick="openModal('numarayakala')">
+      <div class="card-top"><div class="card-icon icon-game"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/><line x1="4.93" y1="4.93" x2="9.17" y2="9.17"/><line x1="14.83" y1="14.83" x2="19.07" y2="19.07"/><line x1="14.83" y1="9.17" x2="19.07" y2="4.93"/><line x1="4.93" y1="19.07" x2="9.17" y2="14.83"/></svg></div><span class="badge b-game">Oyun</span></div>
+      <div class="card-name">Numara Yakala</div>
+      <div class="card-short">Refleks ve dikkat: beliren sayıları yakala</div>
+      <div class="card-foot"><span class="card-cta">Uygulamayı Aç</span><div class="card-arrow">↗</div></div>
     </div>
   </div>
+</div>
 
-  <!-- ABOUT -->
-  <div class="page" id="page-about">
-    <div class="about-page">
-      <div class="about-header">
-        <div class="about-logo">sebasmobil</div>
-        <div class="about-version">v1.0.01 — Tüm uygulamalar ücretsiz, reklamsız ve süresizdir.</div>
-        <div class="about-tagline">
-          <strong>sebasmobil</strong>, eğitimde teknolojiyi sade ve erişilebilir kılmak için yola çıktı.
-          Karmaşık sistemlere, abonelik ücretlerine ve reklam bombardımanına inanmıyoruz.
-          Her uygulamamız tek bir ilkeyle tasarlandı: <strong>öğretmene zaman kazan, öğrenciye değer kat.</strong>
-          Çevrimdışı çalışır, verini saklamaz, seni takip etmez. Sadece işini yapar.
+<!-- OTHER -->
+<div class="cat-block" id="sec-other">
+  <div class="cat-header">
+    <span class="cat-title" style="color:var(--amber)">Diğer</span>
+    <div class="cat-rule"></div>
+    <span class="cat-count">1 uygulama</span>
+  </div>
+  <div class="apps-grid">
+    <div class="app-card" onclick="openModal('ringcut')">
+      <div class="card-top"><div class="card-icon icon-other"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/><path d="M14 2l4 4-4 4"/></svg></div><span class="badge b-other">Araç</span></div>
+      <div class="card-name">Zil Sesi</div>
+      <div class="card-short">MP3 dosyasını kes, zil sesi olarak kaydet</div>
+      <div class="card-foot"><span class="card-cta">Uygulamayı Aç</span><div class="card-arrow">↗</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<div class="about-section" id="hakkinda">
+  <div class="about-inner">
+    <div>
+      <div class="about-tag">// hakkında</div>
+      <div class="about-heading">sebasmobil</div>
+      <p class="about-body">
+        Ücretsiz, reklamsız web uygulamaları. Çevrimdışı çalışır, veri saklamaz.
+      </p>
+    </div>
+    <div class="info-list">
+      <div class="info-item">
+        <div class="info-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
+        <div>
+          <div class="info-lbl">Lisans</div>
+          <div class="info-val">GNU AGPL v3.0 — <a href="https://www.gnu.org/licenses/agpl-3.0.html" target="_blank" rel="noopener">gnu.org</a></div>
         </div>
       </div>
-
-      <div class="about-card">
-        <div class="about-card-title">📱 Uygulamalar</div>
-        <div class="about-pill-row">
-          <div class="about-pill"><span>👩‍🏫</span> S-Öğretmen</div>
-          <div class="about-pill"><span>📝</span> S-Sınav</div>
-          <div class="about-pill"><span>🎯</span> S-Katılım</div>
-          <div class="about-pill"><span>📦</span> S-Dağıtım</div>
-          <div class="about-pill"><span>🎵</span> S-Müzik</div>
-          <div class="about-pill"><span>🀄</span> S-Okey101</div>
-          <div class="about-pill"><span>🕹️</span> Oyunlar (8)</div>
-          <div class="about-pill"><span>🔧</span> Diğer</div>
+      <div class="info-item">
+        <div class="info-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></div>
+        <div>
+          <div class="info-lbl">Instagram</div>
+          <div class="info-val"><a href="https://instagram.com/sebasmobil" target="_blank" rel="noopener">@sebasmobil</a></div>
         </div>
       </div>
-
-      <div class="about-license">
-        <strong>📄 Lisans</strong><br><br>
-        Bu proje ve bünyesindeki tüm uygulamalar <strong>GNU AGPL v3.0</strong> lisansı ile lisanslanmıştır.<br><br>
-        <strong>© sebasmobil</strong> — Tüm haklar saklıdır.<br>
-        <a href="https://www.gnu.org/licenses/agpl-3.0.html" target="_blank" rel="noopener">gnu.org/licenses/agpl-3.0</a>
+      <div class="info-item">
+        <div class="info-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+        <div>
+          <div class="info-lbl">E-posta</div>
+          <div class="info-val"><a href="mailto:sebasmobil@proton.me">sebasmobil@proton.me</a></div>
+        </div>
       </div>
-
-      <div class="about-contact">
-        <a href="https://instagram.com/sebasmobil" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
-          </svg>
-          @sebasmobil
-        </a>
-        <a href="mailto:sebasmobil@proton.me">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>
-          </svg>
-          sebasmobil@proton.me
-        </a>
+      <div class="info-item">
+        <div class="info-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+        <div>
+          <div class="info-lbl">Sürüm</div>
+          <div class="info-val">v1.0.01 — Tüm haklar saklıdır</div>
+        </div>
       </div>
-    </div>
-  </div>
-</main>
-
-<!-- BOTTOM BAR -->
-<div class="bottom-bar">
-  <button class="bar-btn active" id="barHome" onclick="switchPage('home','barHome')">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>
-    </svg>
-    <span>Ana Sayfa</span>
-  </button>
-  <button class="bar-btn" id="barApps" onclick="switchPage('apps','barApps')">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <rect x="2" y="2" width="9" height="9" rx="2"/><rect x="13" y="2" width="9" height="9" rx="2"/>
-      <rect x="2" y="13" width="9" height="9" rx="2"/><rect x="13" y="13" width="9" height="9" rx="2"/>
-    </svg>
-    <span>Uygulamalar</span>
-  </button>
-  <button class="bar-btn" id="barAbout" onclick="switchPage('about','barAbout')">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
-    </svg>
-    <span>Hakkında</span>
-  </button>
-  <div class="bar-divider"></div>
-  <div class="bar-contact">
-    <div class="bar-contact-label">İletişim</div>
-    <div class="bar-contact-icons">
-      <a href="https://instagram.com/sebasmobil" target="_blank" rel="noopener" title="@sebasmobil">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
-        </svg>
-      </a>
-      <a href="mailto:sebasmobil@proton.me" title="sebasmobil@proton.me">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>
-        </svg>
-      </a>
     </div>
   </div>
 </div>
 
-<!-- DETAIL MODAL -->
-<div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+<!-- FOOTER -->
+<footer>
+  <span class="footer-copy">© sebasmobil</span>
+  <div class="footer-links">
+    <a href="https://instagram.com/sebasmobil" target="_blank" rel="noopener">Instagram</a>
+    <a href="mailto:sebasmobil@proton.me">İletişim</a>
+    <a href="https://www.gnu.org/licenses/agpl-3.0.html" target="_blank" rel="noopener">AGPL v3.0</a>
+  </div>
+</footer>
+
+<!-- MODAL -->
+<div class="modal-bg" id="modalBg" onclick="closeBg(event)">
   <div class="modal-sheet">
     <div class="modal-handle"></div>
     <button class="modal-close" onclick="closeModal()">✕</button>
-    <div id="modalContent"></div>
-  </div>
-</div>
-
-<!-- WHAT'S NEW: full-screen scroll page -->
-<div class="news-overlay" id="newsOverlay">
-  <div class="news-hero">
-    <div class="news-hero-title">Yenilikler</div>
-    <div class="news-hero-sub">sebasmobil v1.0.01 — Sürüm Notları</div>
-  </div>
-  <div class="news-content">
-    <div class="news-item"><div class="news-item-dot"></div><div class="news-item-text"><strong>S-Öğretmen</strong> uygulaması eklendi — sosyal kulüp, sınıf rehberliği, ders programı ve not çizelgesi veri girişi <span class="news-item-tag">YENİ</span></div></div>
-    <div class="news-item"><div class="news-item-dot"></div><div class="news-item-text"><strong>S-Sınav</strong> uygulaması eklendi — fotoğraf tabanlı yazılı sınav kağıdı hazırlama aracı <span class="news-item-tag">YENİ</span></div></div>
-    <div class="news-item"><div class="news-item-dot"></div><div class="news-item-text"><strong>S-Katılım</strong> uygulaması eklendi — sınıfta rastgele öğrenci seçici <span class="news-item-tag">YENİ</span></div></div>
-    <div class="news-item"><div class="news-item-dot"></div><div class="news-item-text"><strong>S-Dağıtım</strong> uygulaması geliştirme aşamasında eklendi — öğretmen/sınıf ders programı oluşturma aracı <span class="news-item-tag beta">BETA</span></div></div>
-    <div class="news-item"><div class="news-item-dot"></div><div class="news-item-text"><strong>S-Müzik</strong> eğlence kategorisine eklendi <span class="news-item-tag">YENİ</span></div></div>
-    <div class="news-item"><div class="news-item-dot"></div><div class="news-item-text"><strong>S-Okey101</strong> uygulaması eklendi — okey ve 101 için çetele tutma aracı <span class="news-item-tag">YENİ</span></div></div>
-    <div class="news-item"><div class="news-item-dot"></div><div class="news-item-text"><strong>🕹️ Oyunlar</strong> kategorisi eklendi — Sudoku, Satranç, Yılan, Dama ve daha fazlası <span class="news-item-tag">YENİ</span></div></div>
-    <div class="news-item"><div class="news-item-dot"></div><div class="news-item-text">Karanlık / Aydınlık tema, cihaz temasını otomatik takip ediyor</div></div>
-    <div class="news-item"><div class="news-item-dot"></div><div class="news-item-text">Uygulama sıralaması kaydediliyor — sürükleyerek yeniden sıralayabilirsiniz</div></div>
-    <div class="news-item"><div class="news-item-dot"></div><div class="news-item-text">Tüm uygulamalar <strong>GNU AGPL v3.0</strong> lisansıyla yayınlandı — özgür, açık kaynak <span class="news-item-tag">LİSANS</span></div></div>
-  </div>
-  <!-- action bar fixed to bottom -->
-  <div class="news-action-bar">
-    <label class="news-checkbox" onclick="toggleNewsCheck()">
-      <div class="news-check-box" id="newsCheckBox"></div>
-      <span class="news-checkbox-label">Bir daha gösterme</span>
-    </label>
-    <button class="btn-primary" onclick="closeNews()">Anlaşıldı →</button>
+    <div id="mIco" class="m-ico"></div>
+    <div id="mName" class="m-name"></div>
+    <div id="mDesc" class="m-desc"></div>
+    <div id="mWarn" class="m-warn" style="display:none"></div>
+    <a id="mBtn" class="m-btn" href="#" target="_blank" rel="noopener">Uygulamaya Git ↗</a>
   </div>
 </div>
 
 <script>
-// ── Giriş Kontrolü ──
-function simpleHash(str){
-  var h1=0xdeadbeef,h2=0x41c6ce57;
-  for(var i=0;i<str.length;i++){
-    var ch=str.charCodeAt(i);
-    h1=Math.imul(h1^ch,2654435761);
-    h2=Math.imul(h2^ch,1597334677);
-  }
-  h1=Math.imul(h1^(h1>>>16),2246822507)^Math.imul(h2^(h2>>>13),3266489909);
-  h2=Math.imul(h2^(h2>>>16),2246822507)^Math.imul(h1^(h1>>>13),3266489909);
-  var r=(4294967296*(2097151&h2)+h1>>>0).toString(16);
-  // ikinci tur
-  var h3=0,h4=0;
-  for(var j=0;j<str.length;j++){
-    h3=(Math.imul(31,h3)+str.charCodeAt(j))|0;
-    h4=(Math.imul(37,h4)+str.charCodeAt(j))|0;
-  }
-  return r + (h3>>>0).toString(16).padStart(8,'0') + (h4>>>0).toString(16).padStart(8,'0');
-}
-const _u = simpleHash('sebas');
-const _p = simpleHash('sebasmobil2026');
-
-function loginKontrol(){
-  try{
-    var u=document.getElementById('loginUser').value.trim();
-    var p=document.getElementById('loginPass').value;
-    var err=document.getElementById('loginError');
-    if(!u||!p){err.textContent='Lütfen tüm alanları doldurun.';return;}
-    if(simpleHash(u)===_u&&simpleHash(p)===_p){
-      try{localStorage.setItem('auth','1')}catch(e){}
-      document.getElementById('loginOverlay').classList.add('hidden');
-    }else{
-      err.textContent='Kullanıcı adı veya şifre hatalı.';
-      document.getElementById('loginPass').value='';
-    }
-  }catch(e){alert('Hata: '+e.message);}
-}
-
-// ── Init ──
-document.addEventListener('DOMContentLoaded', function(){
-  // Enter tuşu
-  ['loginUser','loginPass'].forEach(function(id){
-    var el=document.getElementById(id);
-    if(el) el.addEventListener('keydown',function(e){ if(e.key==='Enter') loginKontrol(); });
-  });
-  // Oturum kontrolü
-  try{ if(localStorage.getItem('auth')==='1') document.getElementById('loginOverlay').classList.add('hidden'); }catch(e){}
-  // Uygulama başlatma
-  try{ renderHomeCards(); }catch(e){}
-  try{ renderAppsPage(); }catch(e){}
-  try{ initView(); }catch(e){}
-  try{ checkNews(); }catch(e){}
-});
-
-const APP_VERSION = 'v1.0.01';
-
 const apps = {
-  edu: [
-    {
-      id: 'sogretmen', name: 'S-Öğretmen', icon: '👩‍🏫', cat: 'edu', dev: false,
-      url: 'http://sebasmobil.github.io/s-ogretmen/',
-      short: 'Öğretmen paneli: sosyal kulüp, rehberlik, ders programı',
-      desc: 'Öğretmenlerin sosyal kulüp görevlerini, sınıf rehberliğini, ders programlarını, not çizelgelerini, yazılı analizlerini ve yıllık planlarını tek ekranda yönetmesini sağlayan gelişmiş bir veri girişi uygulamasıdır. Gösterim değil, kapsamlı veri girişi ve düzenleme odaklıdır.'
-    },
-    {
-      id: 'ssinav', name: 'S-Sınav', icon: '📝', cat: 'edu', dev: false,
-      url: 'https://sebasmobil.github.io/s-sinav/',
-      short: 'Fotoğraflarla yazılı sınav kağıdı hazırlama',
-      desc: 'Öğretmenlerin fotoğraf tabanlı sorularla yazılı sınav kağıtları hazırlamasını sağlar. Soru görsellerini yükleyerek hızlı ve pratik bir şekilde sınav oluşturur. Görsel içeriklerle zengin sınav hazırlığına olanak tanır, internet bağlantısı gerektirmez.'
-    },
-    {
-      id: 'splanolus', name: 'S-Plan Oluştur', icon: '📊', cat: 'edu', dev: false,
-      url: 'https://sebasmobil.github.io/s-ogretmen/s-plan-olustur.html',
-      short: 'Excel planını S-Öğretmen formatına dönüştür',
-      desc: 'Excel dosyasındaki ders planını satır ve sütunları birleştirerek S-Öğretmen uygulamasına uygun formata dönüştürür.'
-    }, icon: '🎯', cat: 'edu', dev: false,
-      url: 'https://sebasmobil.github.io/s-katilim/',
-      short: 'Rastgele öğrenci seçici aracı',
-      desc: 'Sınıfta öğrencileri adil ve eğlenceli bir şekilde rastgele seçin. Animasyonlu ve interaktif arayüzü ile dersi canlandırır. Sınıf listesi kaydedilebilir, her oturumda hazır gelir.'
-    },
-    {
-      id: 'sdagitim', name: 'S-Dağıtım', icon: '📦', cat: 'edu', dev: true,
-      url: 'https://sebasmobil.github.io/s-dagitim/',
-      short: 'Öğretmen & sınıf ders programı oluşturucu',
-      desc: 'Öğretmenlerin ve sınıfların haftalık ders programlarının oluşturulmasını ve düzenlenmesini sağlar. Sınıf bazlı program görünümü, öğretmen bazlı program görünümü ve çakışma kontrolü sunar. Şu an geliştirme aşamasındadır.'
-    }
-  ],
-  ent: [
-    {
-      id: 'smuzik', name: 'S-Müzik', icon: '🎵', cat: 'ent', dev: false,
-      url: 'https://sebasmobil.github.io/s-muzik/',
-      short: 'Eğlenceli müzik deneyimi',
-      desc: 'Müzik keşfedin, çalma listeleri oluşturun ve müzikle eğlenin. Sezgisel arayüzü ile dinleme deneyiminizi zenginleştirir.'
-    },
-    {
-      id: 'sokey101', name: 'S-Okey101', icon: '🀄', cat: 'ent', dev: false,
-      url: 'https://sebasmobil.github.io/oyun/okey101.html',
-      short: 'Okey ve 101 için çetele tutma aracı',
-      desc: 'Okey veya 101 oyunlarında oyuncu puanlarını kolayca takip etmenizi sağlayan çetele uygulamasıdır. Oyuncu ekleme, puan girişi ve skor takibini pratik bir arayüzle sunar.'
-    }
-  ],
-  game: [
-    {
-      id: 'sudoku', name: 'Sudoku', icon: '🔢', cat: 'game', dev: false,
-      url: 'https://sebasmobil.github.io/oyun/sudoku.html',
-      short: 'Klasik Sudoku bulmacası',
-      desc: 'Sayı mantığına dayalı klasik Sudoku bulmacası. Farklı zorluk seviyeleriyle hem başlangıç hem de ileri düzey oyuncular için uygundur.'
-    },
-    {
-      id: 'satranc', name: 'Satranç', icon: '♟️', cat: 'game', dev: false,
-      url: 'https://sebasmobil.github.io/oyun/satranc.html',
-      short: 'Strateji tahtası: satranç oyunu',
-      desc: 'Klasik satranç oyununu mobil cihazınızda oynayın. Strateji ve zihin geliştirme odaklı, sezgisel bir arayüzle sunulmuştur.'
-    },
-    {
-      id: 'matematik', name: 'Matematik', icon: '➕', cat: 'game', dev: false,
-      url: 'https://sebasmobil.github.io/oyun/matematik.html',
-      short: 'Eğlenceli matematik işlemleri oyunu',
-      desc: 'Dört işlem becerilerini eğlenceli sorularla pekiştirin. Hız ve doğruluk odaklı matematik oyunu, her yaş için uygundur.'
-    },
-    {
-      id: 'yilan', name: 'Yılan', icon: '🐍', cat: 'game', dev: false,
-      url: 'https://sebasmobil.github.io/oyun/yilan.html',
-      short: 'Klasik yılan oyunu',
-      desc: 'Efsanevi yılan oyununun modern versiyonu. Yılanı yönlendirin, büyütün ve rekor kırmaya çalışın.'
-    },
-    {
-      id: 'hafiza', name: 'Hafıza Kartı', icon: '🃏', cat: 'game', dev: false,
-      url: 'https://sebasmobil.github.io/oyun/hafiza.html',
-      short: 'Eşleştirme tabanlı hafıza kart oyunu',
-      desc: 'Kartları çevirerek eşleşen çiftleri bulun. Konsantrasyon ve hafızayı geliştiren klasik kart oyunu.'
-    },
-    {
-      id: 'kelimeavcisi', name: 'Kelime Avcısı', icon: '🔤', cat: 'game', dev: false,
-      url: 'https://sebasmobil.github.io/oyun/kelime-avcisi.html',
-      short: 'Kelime bulma ve tahmin oyunu',
-      desc: 'Harfleri birleştirerek gizli kelimeleri bulun. Sözcük dağarcığını geliştiren ve eğlenceli vakit geçirmenizi sağlayan kelime oyunu.'
-    },
-    {
-      id: 'numarayakala', name: 'Numara Yakala', icon: '🎯', cat: 'game', dev: false,
-      url: 'https://sebasmobil.github.io/oyun/numara.html',
-      short: 'Sayı tahmin ve refleks oyunu',
-      desc: 'Beliren sayıları hızlıca yakalayın. Refleks ve dikkat becerilerinizi test eden hızlı tempolu bir oyun.'
-    }
-  ],
-  other: [
-    {
-      id: 'ringcut', name: 'Zil Sesi', icon: '🎵', cat: 'other', dev: false,
-      url: 'https://sebasmobil.github.io/diger/ringcut.html',
-      short: 'MP3 kesip zil sesi yapma aracı',
-      desc: 'Ses dosyalarının istediğiniz bölümünü keserek zil sesi olarak kaydedebilirsiniz. MP3 ve diğer ses formatlarını destekler.'
-    }
-  ]
+  sogretmen:    {e:'👩‍🏫',n:'S-Öğretmen',    u:'http://sebasmobil.github.io/s-ogretmen/',                     b:false,d:'Öğretmenlerin sosyal kulüp görevlerini, sınıf rehberliğini, ders programlarını, not çizelgelerini, yazılı analizlerini ve yıllık planlarını tek ekranda yönetmesini sağlayan gelişmiş bir veri girişi uygulamasıdır.'},
+  ssinav:       {e:'📝',  n:'S-Sınav',        u:'https://sebasmobil.github.io/s-sinav/',                        b:false,d:'Öğretmenlerin fotoğraf tabanlı sorularla yazılı sınav kağıtları hazırlamasını sağlar. İnternet bağlantısı gerektirmez, görsel içeriklerle zengin sınav hazırlığına olanak tanır.'},
+  splanolus:    {e:'📊',  n:'S-Plan Oluştur', u:'https://sebasmobil.github.io/s-ogretmen/s-plan-olustur.html', b:false,d:'Excel dosyasındaki ders planını satır ve sütunları birleştirerek S-Öğretmen uygulamasına uygun formata dönüştürür.'},
+  skatilim:     {e:'🎯',  n:'S-Katılım',      u:'https://sebasmobil.github.io/s-katilim/',                      b:false,d:'Sınıfta öğrencileri adil ve eğlenceli biçimde rastgele seçin. Animasyonlu arayüzü ile dersi canlandırır, sınıf listesi kaydedilebilir.'},
+  sdagitim:     {e:'📦',  n:'S-Dağıtım',      u:'https://sebasmobil.github.io/s-dagitim/',                      b:true, d:'Öğretmen ve sınıf bazlı haftalık ders programı oluşturma ve düzenleme aracı. Çakışma kontrolü ve farklı görünüm seçenekleri sunar. Şu an geliştirme aşamasındadır.'},
+  smuzik:       {e:'🎵',  n:'S-Müzik',        u:'https://sebasmobil.github.io/s-muzik/',                        b:false,d:'Müzik keşfedin, çalma listeleri oluşturun ve müzikle eğlenin. Sezgisel arayüzü ile dinleme deneyiminizi zenginleştirir.'},
+  sokey101:     {e:'🀄',  n:'S-Okey101',      u:'https://sebasmobil.github.io/oyun/okey101.html',               b:false,d:'Okey veya 101 oyunlarında oyuncu puanlarını kolayca takip etmenizi sağlayan çetele uygulamasıdır. Oyuncu ekleme, puan girişi ve skor takibi pratik bir arayüzle sunulur.'},
+  sudoku:       {e:'🔢',  n:'Sudoku',          u:'https://sebasmobil.github.io/oyun/sudoku.html',                b:false,d:'Sayı mantığına dayalı klasik Sudoku bulmacası. Farklı zorluk seviyeleriyle hem başlangıç hem ileri düzey oyuncular için uygundur.'},
+  satranc:      {e:'♟️', n:'Satranç',         u:'https://sebasmobil.github.io/oyun/satranc.html',               b:false,d:'Klasik satranç oyununu mobil cihazınızda oynayın. Strateji ve zihin geliştirme odaklı, sezgisel arayüzle sunulmuştur.'},
+  matematik:    {e:'➕',  n:'Matematik',       u:'https://sebasmobil.github.io/oyun/matematik.html',             b:false,d:'Dört işlem becerilerini eğlenceli sorularla pekiştirin. Hız ve doğruluk odaklı matematik oyunu, her yaş için uygundur.'},
+  yilan:        {e:'🐍',  n:'Yılan',           u:'https://sebasmobil.github.io/oyun/yilan.html',                 b:false,d:'Efsanevi yılan oyununun modern versiyonu. Yılanı yönlendirin, büyütün ve rekor kırmaya çalışın.'},
+  hafiza:       {e:'🃏',  n:'Hafıza Kartı',    u:'https://sebasmobil.github.io/oyun/hafiza.html',                b:false,d:'Kartları çevirerek eşleşen çiftleri bulun. Konsantrasyon ve hafızayı geliştiren klasik kart oyunu.'},
+  kelimeavcisi: {e:'🔤',  n:'Kelime Avcısı',   u:'https://sebasmobil.github.io/oyun/kelime-avcisi.html',         b:false,d:'Harfleri birleştirerek gizli kelimeleri bulun. Sözcük dağarcığını geliştiren eğlenceli bir kelime oyunu.'},
+  numarayakala: {e:'🎯',  n:'Numara Yakala',   u:'https://sebasmobil.github.io/oyun/numara.html',                b:false,d:'Beliren sayıları hızlıca yakalayın. Refleks ve dikkat becerilerinizi test eden hızlı tempolu bir oyun.'},
+  ringcut:      {e:'🎵',  n:'Zil Sesi',        u:'https://sebasmobil.github.io/diger/ringcut.html',               b:false,d:'Ses dosyalarının istediğiniz bölümünü keserek zil sesi olarak kaydedebilirsiniz. MP3 ve diğer ses formatlarını destekler.'},
 };
 
-// ── Storage ──
-function saveOrder(cat,ids){ try{localStorage.setItem('order_'+cat,JSON.stringify(ids))}catch(e){} }
-function loadOrder(cat){ try{const d=localStorage.getItem('order_'+cat);return d?JSON.parse(d):null}catch(e){return null} }
-function applyOrder(arr,cat){
-  const saved=loadOrder(cat); if(!saved) return arr;
-  const map={}; arr.forEach(a=>map[a.id]=a);
-  const res=saved.filter(id=>map[id]).map(id=>map[id]);
-  arr.forEach(a=>{if(!saved.includes(a.id))res.push(a)});
-  return res;
+function openModal(id) {
+  const a = apps[id]; if (!a) return;
+  document.getElementById('mIco').textContent  = a.e;
+  document.getElementById('mName').textContent = a.n;
+  document.getElementById('mDesc').textContent = a.d;
+  document.getElementById('mBtn').href         = a.u;
+  const w = document.getElementById('mWarn');
+  w.style.display = a.b ? 'block' : 'none';
+  if (a.b) w.textContent = '⚠ Bu uygulama geliştirme aşamasındadır. Kullanımda sorunlar yaşanabilir.';
+  document.getElementById('modalBg').classList.add('open');
+  document.body.style.overflow = 'hidden';
 }
+function closeModal() {
+  document.getElementById('modalBg').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function closeBg(e) { if (e.target === document.getElementById('modalBg')) closeModal(); }
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
-// ── Theme ──
-function getSystemTheme(){ return window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'; }
-function applyTheme(t){
-  document.documentElement.setAttribute('data-theme',t);
-  document.getElementById('themeToggle').textContent = t==='dark'?'☀️':'🌙';
-  // inline style'ları temizle — tüm renkler CSS variable'lardan gelsin
-  document.documentElement.style.background = '';
-  document.body.style.background = '';
-  // Safari'yi durum çubuğu rengini anlık güncellemesi için reflow zorla
-  document.body.style.display = 'none';
-  document.body.offsetHeight; // reflow tetikle
-  document.body.style.display = '';
-}
-// ── Görünüm Seçici ──
-function setView(v){
-  try{localStorage.setItem('appsView',v)}catch(e){}
-  document.querySelectorAll('.apps-grid').forEach(g=>{
-    g.className='apps-grid view-'+v;
-  });
-  document.querySelectorAll('.view-btn').forEach(b=>b.classList.remove('active'));
-  const btn=document.getElementById('vbtn-'+v);
-  if(btn) btn.classList.add('active');
-}
-function initView(){
-  let v='card';
-  try{v=localStorage.getItem('appsView')||'card'}catch(e){}
-  setView(v);
-}
-
-function cikisYap(){
-  if(!confirm('Çıkış yapmak istediğinize emin misiniz?')) return;
-  try{localStorage.removeItem('auth')}catch(e){}
-  document.getElementById('loginUser').value='';
-  document.getElementById('loginPass').value='';
-  document.getElementById('loginError').textContent='';
-  document.getElementById('loginOverlay').classList.remove('hidden');
-}
-function toggleTheme(){
-  const next=document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark';
-  try{localStorage.setItem('theme',next)}catch(e){}
-  location.reload();
-}
-(function(){
-  let saved; try{saved=localStorage.getItem('theme')}catch(e){}
-  applyTheme(saved||getSystemTheme());
-  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change',e=>{
-    let manual; try{manual=localStorage.getItem('theme')}catch(e){}
-    if(!manual) applyTheme(e.matches?'dark':'light');
-  });
-})();
-
-// ── Greeting (Turkey time = UTC+3) ──
-function updateGreeting(){
-  // Get Turkey local time
-  const now = new Date();
-  const trOffset = 3 * 60; // UTC+3 in minutes
-  const utc = now.getTime() + now.getTimezoneOffset() * 60000;
-  const trTime = new Date(utc + trOffset * 60000);
-  const h = trTime.getHours();
-
-  let msg;
-  if      (h >= 5  && h < 12) msg = 'günaydın! ☀️';
-  else if (h >= 12 && h < 14) msg = 'tünaydın! 🌤️';
-  else if (h >= 14 && h < 18) msg = 'iyi günler! 🌤️';
-  else if (h >= 18 && h < 22) msg = 'iyi akşamlar! 🌆';
-  else                         msg = 'iyi geceler! 🌙';
-  document.getElementById('greetingText').textContent = msg;
-}
-updateGreeting(); setInterval(updateGreeting, 60000);
-
-// ── Home cards ──
-function renderHomeCards(){
-  ['edu','ent','game','other'].forEach(cat=>{
-    const grid=document.getElementById('home-'+cat+'-grid');
-    grid.innerHTML='';
-    applyOrder(apps[cat],cat).forEach(app=>grid.appendChild(createHomeCard(app)));
-  });
-}
-function createHomeCard(app){
-  const div=document.createElement('div');
-  div.className='app-card glow-card';
-  div.onclick=()=>openModal(app);
-  const tc=app.dev?'card-tag-dev':(app.cat==='edu'?'card-tag-edu':app.cat==='game'?'card-tag-game':app.cat==='other'?'card-tag-other':'card-tag-ent');
-  const tt=app.dev?'Geliştiriliyor':(app.cat==='edu'?'Eğitim':app.cat==='game'?'Oyun':app.cat==='other'?'Diğer':'Eğlence');
-  const ic=app.cat==='edu'?'card-icon-edu':app.cat==='game'?'card-icon-game':app.cat==='other'?'card-icon-other':'card-icon-ent';
-  div.innerHTML=`<div class="card-icon ${ic}">${app.icon}</div><div class="card-name">${app.name}</div><div class="card-desc">${app.short}</div><span class="card-tag ${tc}">${tt}</span>`;
-  return div;
-}
-
-// ── Modal ──
-function openModal(app){
-  const ic=app.cat==='edu'?'card-icon-edu':app.cat==='game'?'card-icon-game':app.cat==='other'?'card-icon-other':'card-icon-ent';
-  const warn=app.dev?`<div class="modal-warning">⚠️ <span>Bu uygulama henüz geliştirme aşamasındadır. Şu an için düzgün kullanım mümkün olmayabilir; yalnızca geliştirme sürecine yönelik erişim sağlanmaktadır.</span></div>`:'';
-  document.getElementById('modalContent').innerHTML=`
-    <div class="modal-icon ${ic}">${app.icon}</div>
-    <div class="modal-title">${app.name}</div>
-    <div class="modal-subtitle">${app.desc}</div>
-    ${warn}
-    <div class="modal-actions">
-      <a href="${app.url}" target="_blank" rel="noopener" class="btn-primary">🚀 Uygulamaya Git</a>
-    </div>`;
-  document.getElementById('modalOverlay').classList.add('open');
-}
-function closeModal(e){
-  if(!e||e.target===document.getElementById('modalOverlay'))
-    document.getElementById('modalOverlay').classList.remove('open');
-}
-
-// ── Apps page tiles ──
-function renderAppsPage(){
-  renderTileGrid('apps-edu-grid',apps.edu,'edu');
-  renderTileGrid('apps-ent-grid',apps.ent,'ent');
-  renderTileGrid('apps-game-grid',apps.game,'game');
-  renderTileGrid('apps-other-grid',apps.other,'other');
-}
-function renderTileGrid(gridId,appList,cat){
-  const grid=document.getElementById(gridId);
-  grid.innerHTML='';
-  applyOrder(appList,cat).forEach(app=>{
-    const div=document.createElement('div');
-    div.className='app-tile';
-    div.draggable=true; div.dataset.id=app.id; div.dataset.cat=cat;
-    const appUrl=app.url;
-    const ic=cat==='edu'?'tile-icon-edu':cat==='game'?'tile-icon-game':cat==='other'?'tile-icon-other':'tile-icon-ent';
-    div.innerHTML=`${app.dev?'<span class="tile-badge">BETA</span>':''}<div class="tile-icon ${ic}">${app.icon}</div><div class="tile-name">${app.name}</div><div class="tile-desc">${app.short}</div>`;
-    div.addEventListener('click',function(){
-      if(!isDragging) window.open(appUrl,'_blank','noopener');
-    });
-    setupDrag(div,cat);
-    grid.appendChild(div);
+function fc(cat, btn) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.cat-block').forEach(s => {
+    s.classList.toggle('hidden', cat !== 'all' && s.id !== 'sec-' + cat);
   });
 }
 
-// ── Drag & Drop ──
-let dragSrc=null, isDragging=false;
-function setupDrag(el,cat){
-  el.addEventListener('dragstart',e=>{ dragSrc=el; isDragging=true; el.classList.add('dragging'); e.dataTransfer.effectAllowed='move'; });
-  el.addEventListener('dragend',()=>{ el.classList.remove('dragging'); document.querySelectorAll('.app-tile').forEach(i=>i.classList.remove('drag-over')); setTimeout(()=>isDragging=false,50); });
-  el.addEventListener('dragover',e=>{ e.preventDefault(); if(dragSrc&&dragSrc!==el&&dragSrc.dataset.cat===el.dataset.cat) el.classList.add('drag-over'); });
-  el.addEventListener('dragleave',()=>el.classList.remove('drag-over'));
-  el.addEventListener('drop',e=>{
-    e.preventDefault(); e.stopPropagation(); el.classList.remove('drag-over');
-    if(!dragSrc||dragSrc===el||dragSrc.dataset.cat!==el.dataset.cat) return;
-    const grid=el.parentNode, items=[...grid.querySelectorAll('.app-tile')];
-    if(items.indexOf(dragSrc)<items.indexOf(el)) grid.insertBefore(dragSrc,el.nextSibling);
-    else grid.insertBefore(dragSrc,el);
-    saveOrder(cat,[...grid.querySelectorAll('.app-tile')].map(i=>i.dataset.id));
+function toggleTheme() {
+  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  const next = isDark ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', next);
+  document.getElementById('themeBtn').textContent = next === 'dark' ? '☀️' : '🌙';
+  try { localStorage.setItem('sbm_theme', next); } catch(e){}
+}
+
+/* ── PALETTE ── */
+const palettes = [
+  { id:'blue',   label:'Mavi',   colors:['#5b8eff','#9d6eff','#00e5a0','#3d4566'] },
+  { id:'rose',   label:'Pembe',  colors:['#ff6b9d','#ff4d6d','#ffd166','#3d4566'] },
+  { id:'amber',  label:'Sarı',   colors:['#f59e0b','#ef4444','#84cc16','#3d4566'] },
+  { id:'green',  label:'Yeşil',  colors:['#10b981','#06b6d4','#a3e635','#3d4566'] },
+  { id:'purple', label:'Mor',    colors:['#a855f7','#ec4899','#38bdf8','#3d4566'] },
+  { id:'cyan',   label:'Camgöbeği', colors:['#22d3ee','#818cf8','#fb7185','#3d4566'] },
+  { id:'orange', label:'Turuncu',colors:['#fb923c','#f43f5e','#facc15','#3d4566'] },
+  { id:'mono',   label:'Mono',   colors:['#e2e8f0','#94a3b8','#64748b','#3d4566'] },
+];
+
+let currentColor = 'blue';
+
+function buildPalette() {
+  const panel = document.getElementById('palettePanel');
+  panel.innerHTML = '';
+  palettes.forEach(p => {
+    const sw = document.createElement('button');
+    sw.className = 'color-swatch' + (p.id === currentColor ? ' active' : '');
+    sw.title = p.label;
+    sw.style.background = `linear-gradient(135deg, ${p.colors[0]} 0%, ${p.colors[1]} 50%, ${p.colors[2]} 100%)`;
+    sw.onclick = () => applyColor(p.id);
+    panel.appendChild(sw);
   });
-  el.addEventListener('click',e=>{ if(isDragging) e.preventDefault(); });
+  updateDots();
 }
 
-// ── Page switch ──
-function switchPage(page,barId){
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.querySelectorAll('.bar-btn').forEach(b=>b.classList.remove('active'));
-  document.getElementById('page-'+page).classList.add('active');
-  document.getElementById(barId).classList.add('active');
+function updateDots() {
+  const p = palettes.find(x => x.id === currentColor) || palettes[0];
+  const dots = document.getElementById('paletteDots');
+  dots.innerHTML = p.colors.slice(0,4).map((c,i) =>
+    `<div class="palette-btn-dot" style="background:${c}"></div>`
+  ).join('');
 }
 
-// ── What's new ──
-let newsChecked=false;
-function toggleNewsCheck(){
-  newsChecked=!newsChecked;
-  document.getElementById('newsCheckBox').classList.toggle('checked',newsChecked);
+function applyColor(id) {
+  currentColor = id;
+  document.documentElement.setAttribute('data-color', id);
+  try { localStorage.setItem('sbm_color', id); } catch(e){}
+  buildPalette();
 }
-function closeNews(){
-  if(newsChecked){try{localStorage.setItem('news_seen_'+APP_VERSION,'1')}catch(e){}}
-  document.getElementById('newsOverlay').classList.remove('open');
-  document.getElementById('newsOverlay').scrollTop=0;
-  document.documentElement.style.overflow='';
-  document.body.style.overflow='';
+
+function togglePalette() {
+  document.getElementById('palettePanel').classList.toggle('open');
 }
-function checkNews(){
-  let seen=false; try{seen=!!localStorage.getItem('news_seen_'+APP_VERSION)}catch(e){}
-  if(!seen) setTimeout(()=>openNews(),600);
-}
-function openNews(){
-  var el = document.getElementById('newsOverlay');
-  el.classList.add('open');
-  document.documentElement.style.overflow='hidden';
-  document.body.style.overflow='hidden';
-}
-/* Re-lock on orientation change while overlay is open */
-window.addEventListener('orientationchange', function(){
-  if(document.getElementById('newsOverlay').classList.contains('open')){
-    document.documentElement.style.overflow='hidden';
-    document.body.style.overflow='hidden';
+document.addEventListener('click', e => {
+  const wrap = document.querySelector('.palette-wrap');
+  if (wrap && !wrap.contains(e.target)) {
+    document.getElementById('palettePanel').classList.remove('open');
   }
 });
 
+(function(){
+  let t = 'dark';
+  try { t = localStorage.getItem('sbm_theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'); } catch(e){}
+  document.documentElement.setAttribute('data-theme', t);
+  document.getElementById('themeBtn').textContent = t === 'dark' ? '☀️' : '🌙';
+
+  let c = 'blue';
+  try { c = localStorage.getItem('sbm_color') || 'blue'; } catch(e){}
+  currentColor = c;
+  document.documentElement.setAttribute('data-color', c);
+  buildPalette();
+})();
+
+/* ── SCROLL & ENTRANCE ANIMATIONS ── */
+
+// Hero entrance on load
+window.addEventListener('load', () => {
+  requestAnimationFrame(() => {
+    document.querySelector('.hero').classList.add('hero-loaded');
+  });
+});
+
+// Generic IntersectionObserver for .reveal, .about-inner, .cat-header, .section-header
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.reveal, .about-inner, .section-header').forEach(el => {
+  observer.observe(el);
+});
+
+// Cat headers
+document.querySelectorAll('.cat-header').forEach(el => observer.observe(el));
+
+// Cards: staggered per grid
+const cardObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const card = entry.target;
+      // Find index among siblings in same grid
+      const siblings = Array.from(card.parentElement.querySelectorAll('.app-card'));
+      const idx = siblings.indexOf(card);
+      card.style.transitionDelay = (idx * 60) + 'ms';
+      card.style.transition = `opacity 0.55s cubic-bezier(0.22,1,0.36,1), transform 0.55s cubic-bezier(0.22,1,0.36,1), border-color 0.2s, box-shadow 0.2s, background 0.2s`;
+      card.classList.add('visible');
+      cardObserver.unobserve(card);
+    }
+  });
+}, { threshold: 0.08, rootMargin: '0px 0px -20px 0px' });
+
+document.querySelectorAll('.app-card').forEach(el => cardObserver.observe(el));
+
+// Re-observe cards after filter change (fc function override)
+const _fc = fc;
+window.fc = function(cat, btn) {
+  _fc(cat, btn);
+  // Small delay so display:none blocks are re-shown
+  requestAnimationFrame(() => {
+    document.querySelectorAll('.cat-block:not(.hidden) .app-card').forEach(el => {
+      if (!el.classList.contains('visible')) cardObserver.observe(el);
+    });
+  });
+};
 </script>
 </body>
 </html>
