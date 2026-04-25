@@ -396,13 +396,13 @@ nav a:hover { color: var(--text); background: var(--surface); border-color: var(
 }
 .card-icon svg { width: 22px; height: 22px; }
 .icon-edu svg   { color: var(--accent); }
-.icon-ent svg   { color: var(--accent3); }
+.icon-ent svg   { color: var(--accent2); }
 .icon-game svg  { color: var(--accent); }
 .icon-other svg { color: var(--accent2); }
 
 .info-icon svg { width: 18px; height: 18px; color: var(--text2); }
-.icon-edu   { background: linear-gradient(135deg,rgba(91,142,255,.2),rgba(157,110,255,.15)); }
-.icon-ent   { background: linear-gradient(135deg,rgba(0,229,160,.2),rgba(0,181,125,.1)); }
+.icon-edu   { background: linear-gradient(135deg,var(--glow1),var(--glow2)); }
+.icon-ent   { background: linear-gradient(135deg,var(--glow2),var(--glow1)); }
 .icon-game  { background: linear-gradient(135deg,var(--glow1),var(--glow2)); }
 .icon-other { background: linear-gradient(135deg,var(--glow2),var(--glow1)); }
 
@@ -412,11 +412,11 @@ nav a:hover { color: var(--text); background: var(--surface); border-color: var(
   letter-spacing: 1.2px; text-transform: uppercase;
   padding: 4px 9px; border-radius: 5px;
 }
-.b-edu   { background: rgba(91,142,255,.12); color: var(--accent); border: 1px solid rgba(91,142,255,.2); }
-.b-ent   { background: rgba(0,229,160,.12);  color: var(--accent3); border: 1px solid rgba(0,229,160,.2); }
-.b-game  { background: var(--glow1); color: var(--accent); border: 1px solid var(--glow1); }
+.b-edu   { background: var(--glow1); color: var(--accent);  border: 1px solid var(--glow1); }
+.b-ent   { background: var(--glow2); color: var(--accent2); border: 1px solid var(--glow2); }
+.b-game  { background: var(--glow1); color: var(--accent);  border: 1px solid var(--glow1); }
 .b-other { background: var(--glow2); color: var(--accent2); border: 1px solid var(--glow2); }
-.b-beta  { background: rgba(255,184,63,.12); color: var(--amber); border: 1px solid rgba(255,184,63,.2); }
+.b-beta  { background: var(--glow1); color: var(--accent2); border: 1px solid var(--glow1); }
 
 .card-name {
   font-family: 'Syne', sans-serif;
@@ -889,7 +889,7 @@ footer {
         <div class="info-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
         <div>
           <div class="info-lbl">Sürüm</div>
-          <div class="info-val">v1.0.05 — Tüm haklar saklıdır</div>
+          <div class="info-val">v1.0.06 — Tüm haklar saklıdır</div>
         </div>
       </div>
     </div>
